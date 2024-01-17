@@ -1,0 +1,5 @@
+# General system and environment files
+__pycache__
+.env
+firebase_creds.json
+test

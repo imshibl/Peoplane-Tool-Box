@@ -44,7 +44,7 @@ class RegexPatterns:
     #     r"P\s*r\s*o\s*j\s*e\s*c\s*t\s*s|P\s*R\s*O\s*J\s*E\s*C\s*T\s*S|P\s*r\s*o\s*j\s*e\s*c\s*t|P\s*R\s*O\s*J\s*E\s*C\s*T"
     # )
     projects_pattern = re.compile(
-        r"P\s*r\s*o\s*j\s*e\s*c\s*t\s*s|P\s*R\s*O\s*J\s*E\s*C\s*T\s*S|P\s*R\s*O\s*J\s*E\s*C\s*T"
+        r"P\s*r\s*o\s*j\s*e\s*c\s*t\s*s|P\s*R\s*O\s*J\s*E\s*C\s*T\s*S"
     )
 
     declaration_pattern = re.compile(

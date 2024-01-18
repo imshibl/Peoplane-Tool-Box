@@ -8,27 +8,27 @@ from firebase_admin import credentials, db, firestore, storage
 
 
 class FirebaseHelper:
-    __cred = credentials.Certificate(
-        "C:\\Users\\bil\\Desktop\\sop_quality_checker\\firebase_creds.json"
-    )
-    __firebase_app = firebase_admin.initialize_app(
-        __cred,
-        {
-            "databaseURL": "https://sop-quality-checker-default-rtdb.asia-southeast1.firebasedatabase.app",
-            "storageBucket": "sop-quality-checker.appspot.com",
-        },
-    )
-
-    # use this when deploying
-
-    # __cred = credentials.Certificate("/etc/secrets/firebase_creds.json")
+    # __cred = credentials.Certificate(
+    #     "C:\\Users\\bil\\Desktop\\sop_quality_checker\\firebase_creds.json"
+    # )
     # __firebase_app = firebase_admin.initialize_app(
     #     __cred,
     #     {
-    #         "databaseURL": os.getenv("DATABASE_URL"),
-    #         "storageBucket": os.getenv("STORAGE_BUCKET"),
+    #         "databaseURL": "https://sop-quality-checker-default-rtdb.asia-southeast1.firebasedatabase.app",
+    #         "storageBucket": "sop-quality-checker.appspot.com",
     #     },
     # )
+
+    # use this when deploying
+
+    __cred = credentials.Certificate("/etc/secrets/firebase_creds.json")
+    __firebase_app = firebase_admin.initialize_app(
+        __cred,
+        {
+            "databaseURL": os.getenv("DATABASE_URL"),
+            "storageBucket": os.getenv("STORAGE_BUCKET"),
+        },
+    )
 
     firestore_db = firestore.client()
 

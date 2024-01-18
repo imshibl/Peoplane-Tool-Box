@@ -24,12 +24,12 @@ class APIErrorResponses:
         "message": "User does not have permission to perform this action",
     }
 
-    notAPdfFileErrorResponse = {
-        "error": "Not a pdf file",
-        "message": "Please upload a pdf file",
-    }
-
     fileNotSelectedErrorResponse = {
         "error": "File not selected",
         "message": "Please select a PDF file to upload",
+    }
+
+    notAPdfFileErrorResponse = {
+        "error": "Incorrect File Format",
+        "message": "Invalid file format. Please upload a PDF file format of your resume. We recommend always creating resumes in PDF format for optimal compatibility and presentation.",
     }

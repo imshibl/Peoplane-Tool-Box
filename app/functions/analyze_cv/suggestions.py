@@ -20,6 +20,9 @@ class ResumeSuggetions:
     ):
         custom_suggestions = []
 
+        if score < 30:
+            custom_suggestions.append(suggetions["extraction_restriction"])
+
         if (
             not name
             or name == ""

@@ -156,19 +156,19 @@ async def analyze_cv(cv: UploadFile = File(...)):
     resume_score = round(overall_score)
 
     # RESUME UPLOADING SECTION
-    # try:
-    #     current_datetime = datetime.datetime.now()
+    try:
+        current_datetime = datetime.datetime.now()
 
-    #     # Construct the new filename with readable date and time
-    #     formatted_date = current_datetime.strftime("%d-%m-%Y")
-    #     formatted_time = current_datetime.strftime("%I:%M%p")
+        # Construct the new filename with readable date and time
+        formatted_date = current_datetime.strftime("%d-%m-%Y")
+        formatted_time = current_datetime.strftime("%I:%M%p")
 
-    #     new_filename = f"resumes/{formatted_date}_{formatted_time}_{cv.filename}"
+        new_filename = f"resumes/{formatted_date}_{formatted_time}_{cv.filename}"
 
-    #     # Upload the file using the separate function
-    #     FirebaseHelper.upload_cv_to_storage(cv.file, new_filename, cv.content_type)
-    # except Exception as e:
-    #     print(e)
+        # Upload the file using the separate function
+        FirebaseHelper.upload_cv_to_storage(cv.file, new_filename, cv.content_type)
+    except Exception as e:
+        print(e)
 
     resume_checks_performed_till_now = FirebaseHelper.resume_checks_performed_ref.get()
     FirebaseHelper.resume_checks_performed_ref.set(resume_checks_performed_till_now + 1)

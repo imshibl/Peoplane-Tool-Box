@@ -7,9 +7,7 @@ from app.utils.error_responses import APIErrorResponses
 from ..firebase.firebase_helper import FirebaseHelper
 from ..models.feedback_model import FeedbackAndRatingModel
 
-router = APIRouter(
-    prefix="/peoplaneai",
-)
+router = APIRouter()
 
 
 @router.post("/submit-feedback-and-rating", tags=["Feedback & Rating"])

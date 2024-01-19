@@ -18,7 +18,7 @@ else:
     nlp = spacy.load("en_core_web_sm")
 
 
-@router.get("/")
+@router.get("/", tags=["Home"])
 def root():
     maintenance_ongoing = FirebaseHelper.maintenance_ref.get()
 

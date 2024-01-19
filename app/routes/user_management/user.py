@@ -6,9 +6,7 @@ from app.utils.error_responses import APIErrorResponses
 from ...firebase.firebase_helper import FirebaseHelper
 from ...models.user_model import UserModel
 
-router = APIRouter(
-    prefix="/peoplaneai",
-)
+router = APIRouter(prefix="/user")
 
 
 @router.post("/add-user", tags=["User Management"])

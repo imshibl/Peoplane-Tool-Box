@@ -9,9 +9,7 @@ from ...models.user_model import (
     UserModel,
 )
 
-router = APIRouter(
-    prefix="/peoplaneai",
-)
+router = APIRouter(prefix="/consultancy")
 
 
 @router.post("/add-consultancy-user", tags=["Consultancy User Management"])

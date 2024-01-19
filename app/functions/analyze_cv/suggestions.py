@@ -23,14 +23,10 @@ class ResumeSuggetions:
         if score < 30:
             custom_suggestions.append(suggetions["extraction_restriction"])
 
-        if (
-            not name
-            or name == ""
-            or name == " "
-            or name == "\n "
-            or name == "\n"
-            or len(name) < 5
-        ):
+        if score < 80:
+            custom_suggestions.append(suggetions["extraction"])
+
+        if not name or len(name) < 5:
             custom_suggestions.append(suggetions["name"])
 
         if (
@@ -56,13 +52,10 @@ class ResumeSuggetions:
         ):
             custom_suggestions.append(suggetions["sections"])
 
-        if score < 80:
-            custom_suggestions.append(suggetions["extraction"])
-
         return custom_suggestions
 
     def suggest_platforms_to_create_cv(score):
-        if score > 70:
+        if score > 75:
             return None
         else:
             return {
@@ -92,10 +85,11 @@ class ResumeSuggetions:
                 )
 
             else:
-                message = "Your {}-page resume suggests a rich professional history. Ensure that each section contributes to your overall narrative and showcases your key achievements, skills, and experiences. Consider streamlining if possible to maintain reader engagement.".format(
-                    page_count
+                message = (
+                    "Your {}-page resume suggests a rich professional history. Ensure that each section contributes to your overall narrative and showcases your key achievements, skills, and experiences. Consider streamlining if possible to maintain reader engagement.".format(
+                        page_count
+                    ),
                 )
-
         else:
             if page_count == 1:
                 message = (

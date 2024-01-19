@@ -6,16 +6,17 @@ from fastapi import APIRouter, File, HTTPException, UploadFile
 from app.utils.error_responses import APIErrorResponses
 
 from ..firebase.firebase_helper import FirebaseHelper
-from ..functions.analyze_cv.check_name import is_valid_text
+from ..functions.analyze_cv.check_name import clean_name, is_valid_text
+from ..functions.analyze_cv.extract_languages import extract_languages
 from ..functions.analyze_cv.get_embedded_links import extract_embedded_links
 from ..functions.analyze_cv.patterns import RegexPatterns as patterns
 from ..functions.analyze_cv.read_pdf import pdf_reader
 from ..functions.analyze_cv.recommendations import generate_video_recommendations
 from ..functions.analyze_cv.suggestions import ResumeSuggetions as cvSuggetions
 from ..functions.analyze_cv.utils import imp_messages
-from .check_quality import nlp
+from .root import nlp
 
-router = APIRouter(prefix="/peoplaneai")
+router = APIRouter(prefix="/tool")
 
 
 @router.post("/analyze-cv", tags=["Tools"])
@@ -48,6 +49,7 @@ async def analyze_cv(cv: UploadFile = File(...)):
     certifications_match = re.search(patterns.certifications_pattern, text)
     references_match = re.search(patterns.references_pattern, text)
     projects_match = re.search(patterns.projects_pattern, text)
+    honors_and_awards_match = re.search(patterns.honors_and_awards_pattern, text)
     declaration_match = re.search(patterns.declaration_pattern, text)
 
     # Extract information
@@ -71,6 +73,7 @@ async def analyze_cv(cv: UploadFile = File(...)):
     has_certifications = bool(certifications_match)
     has_references = bool(references_match)
     has_projects = bool(projects_match)
+    has_honors_and_awards = bool(honors_and_awards_match)
     has_declaration = bool(declaration_match)
 
     embedded_links = extract_embedded_links(content)
@@ -80,16 +83,24 @@ async def analyze_cv(cv: UploadFile = File(...)):
     contact_number = numbers[0] if numbers else None
     email = emails[0] if emails else None
 
+    name = clean_name(name)
+
+    human_languages_data = extract_languages(text, nlp)
+    human_languages_list = human_languages_data["languages"]
+
+    if len(human_languages_list) == 0:
+        has_languages = False
+
     # CATEGORIZATION SECTION
 
     general_info = {
         "name": name,
         "contact_number": contact_number,
         "country_code": country_code,
+        "email": email,
     }
 
     must_have = {
-        "email": email,
         "experience": has_experience,
         "education": has_education,
         "skills": has_skills,
@@ -100,6 +111,7 @@ async def analyze_cv(cv: UploadFile = File(...)):
         "hobbies_and_interests": has_hobbies_and_interests,
         "certifications": has_certifications,
         "projects": has_projects,
+        "honors_and_awards": has_honors_and_awards,
         "references": has_references,
         "declaration": has_declaration,
     }
@@ -108,6 +120,7 @@ async def analyze_cv(cv: UploadFile = File(...)):
     weights = {
         "name": 5,
         "contact_number": 10,
+        "country_code": 5,
         "email": 15,
         "experience": 15,
         "education": 15,
@@ -116,6 +129,7 @@ async def analyze_cv(cv: UploadFile = File(...)):
         "hobbies_and_interests": 5,
         "certifications": 5,
         "projects": 5,
+        "honors_and_awards": 5,
         "references": 5,
         "declaration": 5,
     }
@@ -123,7 +137,8 @@ async def analyze_cv(cv: UploadFile = File(...)):
     scores = {
         "name": 5 if general_info["name"] else 0,
         "contact_number": 10 if general_info["contact_number"] else 0,
-        "email": 15 if must_have["email"] else 0,
+        "country_code": 5 if general_info["country_code"] else 0,
+        "email": 15 if general_info["email"] else 0,
         "experience": 15 if must_have["experience"] else 0,
         "education": 15 if must_have["education"] else 0,
         "skills": 15 if must_have["skills"] else 0,
@@ -131,6 +146,7 @@ async def analyze_cv(cv: UploadFile = File(...)):
         "hobbies_and_interests": 5 if good_to_have["hobbies_and_interests"] else 0,
         "certifications": 5 if good_to_have["certifications"] else 0,
         "projects": 5 if good_to_have["projects"] else 0,
+        "honors_and_awards": 5 if good_to_have["honors_and_awards"] else 0,
         "references": 5 if good_to_have["references"] else 0,
         "declaration": 5 if good_to_have["declaration"] else 0,
     }
@@ -150,9 +166,12 @@ async def analyze_cv(cv: UploadFile = File(...)):
     #     new_filename = f"resumes/{formatted_date}_{formatted_time}_{cv.filename}"
 
     #     # Upload the file using the separate function
-    #     FirebaseHelper.upload_to_storage(cv.file, new_filename, cv.content_type)
+    #     FirebaseHelper.upload_cv_to_storage(cv.file, new_filename, cv.content_type)
     # except Exception as e:
     #     print(e)
+
+    resume_checks_performed_till_now = FirebaseHelper.resume_checks_performed_ref.get()
+    FirebaseHelper.resume_checks_performed_ref.set(resume_checks_performed_till_now + 1)
 
     # RECOMMENDATIONS SECTION
     video_recommendations = generate_video_recommendations()
@@ -195,6 +214,7 @@ async def analyze_cv(cv: UploadFile = File(...)):
             "general_info": general_info,
             "must_have": must_have,
             "good_to_have": good_to_have,
+            "human_languages": human_languages_data,
             "Embedded Links": embedded_links,
             "video_recommendations": video_recommendations,
             "improvement_suggestions": improvement_suggestions,

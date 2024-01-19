@@ -12,7 +12,7 @@ router = APIRouter(
 )
 
 
-@router.post("/submit-feedback-and-rating", tags=["feedback & rating"])
+@router.post("/submit-feedback-and-rating", tags=["Feedback & Rating"])
 async def submit_feedback_and_rating(
     feedback_data: FeedbackAndRatingModel,
 ):

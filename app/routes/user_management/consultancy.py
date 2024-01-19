@@ -14,7 +14,7 @@ router = APIRouter(
 )
 
 
-@router.post("/add-consultancy-user", tags=["consultancy user management"])
+@router.post("/add-consultancy-user", tags=["Consultancy User Management"])
 async def add_user(user: ConsultancyUserModel):
     if FirebaseHelper.consultancy_exists(user.email):
         raise HTTPException(

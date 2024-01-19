@@ -1,12 +1,21 @@
+import spacy
 from fastapi import APIRouter, HTTPException
 
 from app.utils.error_responses import APIErrorResponses
 
 from ..firebase.firebase_helper import FirebaseHelper
 
-router = APIRouter(
-    prefix="/peoplaneai",
-)
+router = APIRouter()
+
+# Check if the English language model is already installed
+if "en_core_web_sm" not in spacy.util.get_installed_models():
+    # If it's not installed, download and install it
+    spacy.cli.download("en_core_web_sm")
+    # Load the model after installation
+    nlp = spacy.load("en_core_web_sm")
+else:
+    # If it's already installed, you can simply load it
+    nlp = spacy.load("en_core_web_sm")
 
 
 @router.get("/")
@@ -21,6 +30,7 @@ def root():
     no_of_plagiarism_checks_performed = (
         FirebaseHelper.plagiarism_checks_performed_ref.get()
     )
+    no_of_resume_checks_performed = FirebaseHelper.resume_checks_performed_ref.get()
 
     response_data = {
         "title": "Peoplane Tool Box",
@@ -36,6 +46,16 @@ def root():
                 "isActive": True,
                 "status": "Available",
                 "no_of_plagiarism_checks_performed": no_of_plagiarism_checks_performed,
+            },
+            {
+                "name": "Resume Analyzer",
+                "purpose": "For creating polished and effective resumes/cvs",
+                "description": "Our Resume Analyzer is a user-friendly tool designed to assist you in crafting polished and effective resumes. Tailored for job seekers, this tool employs intelligent algorithms to analyze your resume and provides personalized recommendations and suggestions to help you create a standout CV for job applications.",
+                "version": "1.0",
+                "type": "Free",
+                "isActive": True,
+                "status": "Available",
+                "no_of_resume_checks_performed": no_of_resume_checks_performed,
             },
             {
                 "name": "AI Powered University SOP/LOM Quality Checker",
@@ -58,7 +78,7 @@ def root():
                 "no_of_quality_checks_performed": no_of_quality_checks_performed,
             },
         ],
-        "message": "Our AI tools are still under development. it may make mistakes or errors. Consider checking important details yourself or consult professionals for added assurance. Your understanding is appreciated.",
+        "message": "The Peoplane Tool Box is still under development. it may make mistakes or errors. Consider checking important details yourself or consult professionals for added assurance. Your understanding is appreciated.",
     }
     return response_data
 

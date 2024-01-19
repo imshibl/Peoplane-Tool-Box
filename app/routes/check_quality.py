@@ -13,24 +13,14 @@ from ..functions.check_keywords import check_for_experience, check_for_motivatio
 from ..models import check_quality_model as sim
 from ..utils.custom_responses import CustomResponses
 from ..utils.error_responses import APIErrorResponses
+from .root import nlp
 
 router = APIRouter(
-    prefix="/peoplaneai",
+    prefix="/tool",
 )
 
 
-# Check if the English language model is already installed
-if "en_core_web_sm" not in spacy.util.get_installed_models():
-    # If it's not installed, download and install it
-    spacy.cli.download("en_core_web_sm")
-    # Load the model after installation
-    nlp = spacy.load("en_core_web_sm")
-else:
-    # If it's already installed, you can simply load it
-    nlp = spacy.load("en_core_web_sm")
-
-
-@router.post("/check-quality", tags=["tools"])
+@router.post("/check-quality", tags=["Tools"])
 async def check_sop_quality(input: sim.CheckQualityModel):
     maintenance_ongoing = FirebaseHelper.maintenance_ref.get()
 

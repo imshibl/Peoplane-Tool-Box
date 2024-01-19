@@ -10,6 +10,8 @@ resume_videos = [
     "https://youtu.be/CLUsplI4xMU",
     "https://youtu.be/pbczsLkv7Cc",
     "https://youtu.be/ihdyy8RT_b0",
+    "https://youtu.be/NRTs4HsICI8",
+    "https://youtu.be/Tt08KmFfIYQ",
 ]
 
 
@@ -22,10 +24,3 @@ def generate_video_recommendations():
     for video_link in random_recommendations:
         recommended_videos.append(video_link)
     return recommended_videos
-
-
-resume_contents = []
-
-
-def generate_resume_related_content_recommendations():
-    pass

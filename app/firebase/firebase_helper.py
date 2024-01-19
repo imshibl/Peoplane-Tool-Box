@@ -40,9 +40,11 @@ class FirebaseHelper:
     maintenance_ref = db.reference("/isUnderMaintenance")
     quality_checks_performed_ref = db.reference("/quality_checks_performed")
     plagiarism_checks_performed_ref = db.reference("/plagiarism_checks_performed")
+    resume_checks_performed_ref = db.reference("/resume_checks_performed")
 
     storage_bucket = storage.bucket()
 
+    # PLAGIARISM CHECKER
     @classmethod
     def download_csv_as_df(cls, blob_path):
         blob = cls.storage_bucket.blob(blob_path)
@@ -111,7 +113,7 @@ class FirebaseHelper:
 
     # RESUME ANALYZER
     @classmethod
-    def upload_to_storage(cls, file, destination_filename, content_type):
+    def upload_cv_to_storage(cls, file, destination_filename, content_type):
         # Create a blob (object) in the bucket
         blob = cls.storage_bucket.blob(destination_filename)
 

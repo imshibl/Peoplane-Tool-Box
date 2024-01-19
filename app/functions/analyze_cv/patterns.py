@@ -3,7 +3,7 @@ import re
 
 class RegexPatterns:
     # Define regex patterns
-    # name_pattern = re.compile(r"(.+?)\n")
+
     name_pattern = re.compile(r"([^\d]+?)\n")
 
     number_pattern = re.compile(r"\+?(\d{1,4}\s?)?(\d{3}\s?\d{2,3}\s?\d{2,4})\b")
@@ -45,6 +45,10 @@ class RegexPatterns:
     # )
     projects_pattern = re.compile(
         r"P\s*r\s*o\s*j\s*e\s*c\s*t\s*s|P\s*R\s*O\s*J\s*E\s*C\s*T\s*S"
+    )
+
+    honors_and_awards_pattern = re.compile(
+        r"H\s*o\s*n\s*o\s*r\s*s|A\s*w\s*a\s*r\s*d\s*s|H\s*O\s*N\s*O\s*R\s*S|A\s*W\s*A\s*R\s*D\s*S"
     )
 
     declaration_pattern = re.compile(

@@ -5,12 +5,12 @@ from app.utils.error_responses import APIErrorResponses
 from ..firebase.firebase_helper import FirebaseHelper
 from ..functions.check_plagiarism.check_plagiarism import check_plagiarism
 from ..models.check_plagiarism_model import CheckPlagiarismModel
-from .check_quality import nlp
+from .root import nlp
 
-router = APIRouter(prefix="/peoplaneai")
+router = APIRouter(prefix="/tool")
 
 
-@router.post("/check-plagiarism", tags=["tools"])
+@router.post("/check-plagiarism", tags=["Tools"])
 def check_for_plagiarism(input: CheckPlagiarismModel):
     maintenance_ongoing = FirebaseHelper.maintenance_ref.get()
 
@@ -32,9 +32,7 @@ def check_for_plagiarism(input: CheckPlagiarismModel):
     )
 
     check = check_plagiarism(
-        sop=input.content,
-        owner=input.owner_email,
-        type=input.type,
+        input=input,
         nlp=nlp,
     )
 

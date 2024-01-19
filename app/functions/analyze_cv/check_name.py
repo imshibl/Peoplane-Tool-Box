@@ -93,3 +93,11 @@ def is_valid_text(text, nlp):
 
     # If there are valid English words, consider the text valid
     return len(valid_words) > 0
+
+
+def clean_name(name):
+    if name is None:
+        return None
+    if len(name.strip()) == 0:
+        return None
+    return name.replace("\n", "").strip()

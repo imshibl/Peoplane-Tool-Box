@@ -28,7 +28,7 @@ async def add_user(user: UserModel):
     }
 
 
-@router.get("/get-user", tags=["user management"])
+@router.get("/get-user", tags=["User Management"])
 async def get_user(email: EmailStr):
     isUserAvailable = FirebaseHelper.user_exists(email)
 
@@ -44,7 +44,7 @@ async def get_user(email: EmailStr):
     }
 
 
-@router.patch("/update-user", tags=["user management"])
+@router.patch("/update-user", tags=["User Management"])
 async def update_user(user: UserModel):
     isUserAvailable = FirebaseHelper.user_exists(user.email)
 
@@ -59,7 +59,7 @@ async def update_user(user: UserModel):
     }
 
 
-@router.delete("/delete-user", tags=["user management"])
+@router.delete("/delete-user", tags=["User Management"])
 async def delete_user(email: EmailStr):
     isUserAvailable = FirebaseHelper.user_exists(email)
 

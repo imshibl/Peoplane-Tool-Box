@@ -31,7 +31,7 @@ async def add_user(user: ConsultancyUserModel):
     }
 
 
-@router.post("/add-consultancy-child-user", tags=["consultancy user management"])
+@router.post("/add-consultancy-child-user", tags=["Consultancy User Management"])
 async def add_consultancy_child_user(data: ConsultancyChildUserModel):
     FirebaseHelper.add_consultancy_child_user(data.email, data.model_dump())
     return {

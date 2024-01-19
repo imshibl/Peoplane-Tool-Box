@@ -37,6 +37,8 @@ class FirebaseHelper:
 
     feedbacks_ref = firestore_db.collection("Feedbacks")
 
+    cv_collections_ref = firestore_db.collection("CV_Collections")
+
     maintenance_ref = db.reference("/isUnderMaintenance")
     quality_checks_performed_ref = db.reference("/quality_checks_performed")
     plagiarism_checks_performed_ref = db.reference("/plagiarism_checks_performed")
@@ -122,3 +124,16 @@ class FirebaseHelper:
 
         # Upload the file
         blob.upload_from_file(file, content_type=content_type)
+
+        url = blob.generate_signed_url(
+            expiration=datetime.timedelta(days=365), method="GET"
+        )
+
+        print(f"URL: {url}")
+        current_datetime = datetime.datetime.utcnow().strftime("%d-%m-%Y")
+        data = {
+            "download_url": url,
+            "upload_datetime": current_datetime,
+            "filename": destination_filename,
+        }
+        cls.cv_collections_ref.add(data)

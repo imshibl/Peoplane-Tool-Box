@@ -14,7 +14,7 @@ router = APIRouter()
 async def submit_feedback_and_rating(
     feedback_data: FeedbackAndRatingModel,
 ):
-    isUserAvailable = FirebaseHelper.user_exists(feedback_data.user_email)
+    isUserAvailable = FirebaseHelper.user_exists(feedback_data.email)
 
     if not isUserAvailable:
         raise HTTPException(

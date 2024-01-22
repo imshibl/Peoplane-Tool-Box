@@ -51,7 +51,7 @@ def check_plagiarism(input: CheckPlagiarismModel, nlp):
 
         #     continue
 
-        if reference_owner != input.owner_email and reference_type == input.type:
+        if reference_owner != input.email and reference_type == input.type:
             # Calculate similarity for non-matching cases
             similarity = calculate_cosine_similarity(sop_text, reference_text)
 
@@ -65,9 +65,7 @@ def check_plagiarism(input: CheckPlagiarismModel, nlp):
 
     if highest_similarity < 0.5:
         # Add new data to the DataFrame (for example)
-        new_data = (
-            {"SOP": input.content, "Owner": input.owner_email, "Type": input.type},
-        )
+        new_data = ({"SOP": input.content, "Owner": input.email, "Type": input.type},)
         new_data_df = pd.DataFrame(new_data)
         updated_references_df = pd.concat(
             [references_df, new_data_df], ignore_index=True

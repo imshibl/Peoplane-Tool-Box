@@ -3,18 +3,11 @@ from enum import Enum
 from pydantic import BaseModel, EmailStr
 
 
-class ContentType(str, Enum):
-    university = "university"
-    visa = "visa"
-
-
 class UserType(str, Enum):
     user = "user"
     consultancy = "consultancy"
 
 
-class CheckPlagiarismModel(BaseModel):
-    content: str
+class AnalyzeCVModel(BaseModel):
     email: EmailStr
-    type: ContentType
     user_type: UserType

@@ -19,6 +19,15 @@ async def add_user(user: UserModel):
                 "data": user.model_dump(),
             },
         )
+    if user.username is None or user.email is None:
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "message": "Username/Email cannot be empty.",
+                "data": None,
+            },
+        )
+
     FirebaseHelper.users_ref.add(user.model_dump())
     return {
         "message": "User added successfully",
@@ -38,22 +47,17 @@ async def get_user(email: EmailStr):
     user = FirebaseHelper.get_user(email)
     return {
         "message": "User found",
-        "user": user[0].to_dict(),
+        "data": user[0].to_dict(),
     }
 
 
 @router.patch("/update-user", tags=["User Management"])
-async def update_user(user: UserModel):
-    isUserAvailable = FirebaseHelper.user_exists(user.email)
-
-    if not isUserAvailable:
-        raise HTTPException(
-            status_code=404, detail=APIErrorResponses.userNotFoundErrorResponse
-        )
-    user = FirebaseHelper.update_user(user.email, user.model_dump())
+async def update_user(user: UserModel, email: EmailStr):
+    user_data = user.model_dump(exclude_defaults=True, exclude_none=True)
+    user = FirebaseHelper.update_user(email, user_data)
     return {
         "message": "User data updated successfully",
-        "user": user[0].to_dict(),
+        "data": user_data,
     }
 
 
@@ -61,11 +65,8 @@ async def update_user(user: UserModel):
 async def delete_user(email: EmailStr):
     isUserAvailable = FirebaseHelper.user_exists(email)
 
-    if not isUserAvailable:
-        raise HTTPException(
-            status_code=404, detail=APIErrorResponses.userNotFoundErrorResponse
-        )
     FirebaseHelper.delete_user(email)
     return {
         "message": "Account associated with {} deleted successfully".format(email),
+        "data": None,
     }

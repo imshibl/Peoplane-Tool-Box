@@ -84,34 +84,35 @@ class FirebaseHelper:
 
     # CONSULTANCY MANAGEMENT
     @classmethod
-    def consultancy_exists(cls, user_email):
-        user = cls.consultants_ref.where("email", "==", user_email).limit(1).get()
-        return len(user) > 0
-
-    @classmethod
-    def get_consultancy(cls, user_email):
-        user = cls.consultants_ref.where("email", "==", user_email).limit(1).get()
-        return user
-
-    @classmethod
-    def update_consultancy(cls, user_email, user_data):
-        user = cls.consultants_ref.where("email", "==", user_email).limit(1).get()
-        cls.consultants_ref.document(user[0].id).update(user_data)
-        return cls.get_consultancy(user_email)
-
-    @classmethod
-    def delete_consultancy(cls, user_email):
-        user = cls.consultants_ref.where("email", "==", user_email).limit(1).get()
-        cls.consultants_ref.document(user[0].id).delete()
-
-    @classmethod
-    def add_consultancy_child_user(cls, consultancy_email, child_user_data):
-        user = (
+    def consultancy_exists(cls, consultancy_email):
+        consultancy = (
             cls.consultants_ref.where("email", "==", consultancy_email).limit(1).get()
         )
-        cls.consultants_ref.document(user[0].id).collection("sub_users").add(
-            child_user_data
+        return len(consultancy) > 0
+
+    @classmethod
+    def get_consultancy(cls, consultancy_email):
+        consultancy = (
+            cls.consultants_ref.where("email", "==", consultancy_email).limit(1).get()
         )
+        return consultancy
+
+    @classmethod
+    def update_consultancy(cls, consultancy_email, new_consultancy_account_data):
+        consultancy = (
+            cls.consultants_ref.where("email", "==", consultancy_email).limit(1).get()
+        )
+        cls.consultants_ref.document(consultancy[0].id).update(
+            new_consultancy_account_data
+        )
+        return cls.get_consultancy(consultancy_email)
+
+    @classmethod
+    def delete_consultancy(cls, consultancy_email):
+        consultancy = (
+            cls.consultants_ref.where("email", "==", consultancy_email).limit(1).get()
+        )
+        cls.consultants_ref.document(consultancy[0].id).delete()
 
     # RESUME ANALYZER
     @classmethod
@@ -129,7 +130,6 @@ class FirebaseHelper:
             expiration=datetime.timedelta(days=365), method="GET"
         )
 
-        print(f"URL: {url}")
         current_datetime = datetime.datetime.utcnow().strftime("%d-%m-%Y")
         data = {
             "download_url": url,

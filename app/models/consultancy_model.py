@@ -1,7 +1,7 @@
 from pydantic import BaseModel, EmailStr, Field
 
 
-class UserModel(BaseModel):
+class ConsultancyUserModel(BaseModel):
     username: str | None = Field(default=None)
     email: str | None = Field(default=None)
     total_quality_checks_performed: int | None = Field(default=0)

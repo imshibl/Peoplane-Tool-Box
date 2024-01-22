@@ -1,8 +1,10 @@
 import datetime
 import re
 
-from fastapi import APIRouter, File, HTTPException, UploadFile
+from fastapi import APIRouter, File, Form, HTTPException, UploadFile
+from pydantic import EmailStr
 
+from app.models.analyze_cv_model import UserType
 from app.utils.error_responses import APIErrorResponses
 
 from ..firebase.firebase_helper import FirebaseHelper
@@ -20,7 +22,20 @@ router = APIRouter(prefix="/tool")
 
 
 @router.post("/analyze-cv", tags=["Tools"])
-async def analyze_cv(cv: UploadFile = File(...)):
+async def analyze_cv(
+    user_email: EmailStr = Form(...),
+    user_type: UserType = Form(...),
+    cv: UploadFile = File(...),
+):
+    if user_type == UserType.user:
+        user = FirebaseHelper.get_user(user_email)
+    elif user_type == UserType.consultancy:
+        user = FirebaseHelper.get_consultancy(user_email)
+
+    if len(user) == 0:
+        raise HTTPException(
+            status_code=404, detail=APIErrorResponses.userNotFoundErrorResponse
+        )
     if not cv.filename.lower().endswith(".pdf"):
         raise HTTPException(
             status_code=400, detail=APIErrorResponses.notAPdfFileErrorResponse
@@ -170,8 +185,24 @@ async def analyze_cv(cv: UploadFile = File(...)):
     except Exception as e:
         print(e)
 
+    #  # update the number of resume checks performed (int) on admin side
     resume_checks_performed_till_now = FirebaseHelper.resume_checks_performed_ref.get()
     FirebaseHelper.resume_checks_performed_ref.set(resume_checks_performed_till_now + 1)
+
+    # update the number of resume checks performed (int) on user/consultancy side
+    user_data = user[0].to_dict()
+    total_resume_checks = user_data["total_resume_checks_performed"]
+
+    if user_type == UserType.user:
+        FirebaseHelper.update_user(
+            user_email,
+            {"total_resume_checks_performed": total_resume_checks + 1},
+        )
+    elif user_type == UserType.consultancy:
+        FirebaseHelper.update_consultancy(
+            user_email,
+            {"total_resume_checks_performed": total_resume_checks + 1},
+        )
 
     # RECOMMENDATIONS SECTION
     video_recommendations = generate_video_recommendations()

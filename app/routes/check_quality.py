@@ -1,17 +1,22 @@
 import random
 
-import spacy
 from fastapi import APIRouter, HTTPException
 
 from ..firebase.firebase_helper import FirebaseHelper
-from ..functions import check_readability as cr
-from ..functions import check_spelling_issues as csi
-from ..functions import check_vocabulary as cv
-from ..functions import check_word_count as cwc
-from ..functions import extract_data as ed
-from ..functions.check_keywords import check_for_experience, check_for_motivation
+from ..functions.check_sop_quality import check_readability as cr
+from ..functions.check_sop_quality import check_spelling_issues as csi
+from ..functions.check_sop_quality import check_vocabulary as cv
+from ..functions.check_sop_quality import check_word_count as cwc
+from ..functions.check_sop_quality import extract_data as ed
+from ..functions.check_sop_quality.check_keywords import (
+    check_for_experience,
+    check_for_motivation,
+)
+from ..functions.check_sop_quality.extract_program import (
+    extract_education_level_applying_for,
+)
+from ..functions.check_sop_quality.utils.custom_responses import CustomResponses
 from ..models import check_quality_model as sim
-from ..utils.custom_responses import CustomResponses
 from ..utils.error_responses import APIErrorResponses
 from .root import nlp
 
@@ -29,7 +34,7 @@ async def check_sop_quality(input: sim.CheckQualityModel):
             status_code=503, detail=APIErrorResponses.underMaintenanceErrorResponse
         )
 
-    if input.isPremiumUser == False:
+    if input.is_premium_user == False:
         raise HTTPException(
             status_code=404, detail=APIErrorResponses.notAPremiumUserErrorResponse
         )
@@ -65,6 +70,8 @@ async def check_sop_quality(input: sim.CheckQualityModel):
         destination_country_name = destination_country_names[0]
     else:
         destination_country_name = ""
+
+    education_level_applying_for = extract_education_level_applying_for(input.sop)
 
     word_count = cwc.check_word_count(input.sop)
 
@@ -108,8 +115,9 @@ async def check_sop_quality(input: sim.CheckQualityModel):
 
     success_response = {
         "sop_quality": sop_quality,
-        "about_university": about_univerity_message,
-        "about_destination_country": destination_country_name,
+        "university": about_univerity_message,
+        "applying_for": education_level_applying_for,
+        "destination_country": destination_country_name,
         "words": word_count,
         "spelling_grammer_mistakes": spelling_mistakes_count,
         "readability": readability,

@@ -1,7 +1,7 @@
 import string
 
-from ..utils import experience_keywords as exp_keys
-from ..utils import motivation_keywords as moti_keys
+from .utils import experience_keywords as exp_keys
+from .utils import motivation_keywords as moti_keys
 
 
 def check_for_experience(text):

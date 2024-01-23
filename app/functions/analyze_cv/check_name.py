@@ -1,3 +1,5 @@
+import re
+
 english_words = set(
     [
         "summary",
@@ -100,4 +102,8 @@ def clean_name(name):
         return None
     if len(name.strip()) == 0:
         return None
-    return name.replace("\n", "").strip()
+
+    # Remove extra spaces between letters
+    cleaned_name = re.sub(r"\s(?=[A-Z])", "", name)
+
+    return cleaned_name.replace("\n", "").strip()

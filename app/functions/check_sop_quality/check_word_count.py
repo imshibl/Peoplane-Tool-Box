@@ -6,7 +6,7 @@ Always check the specific requirements of the program or university to which you
 
     return {
         "word_count": word_count[0],
-        "message1": "Most SOPs are typically one to two pages in length. Some programs may specify a page limit, so it's crucial to adhere to any guidelines provided by the institution.",
+        "message1": "Most SOPs are typically one to two pages in length. Some programs may specify a page/word count limit, so it's crucial to adhere to any guidelines provided by the institution.",
         "message2": "The word count for an SOP often ranges from 500 to 1500 words. This range allows applicants to convey their thoughts concisely while providing enough information.",
         "message3": message3,
     }

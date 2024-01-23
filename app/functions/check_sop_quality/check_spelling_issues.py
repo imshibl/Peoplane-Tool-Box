@@ -2,8 +2,8 @@ import re
 
 from spellchecker import SpellChecker
 
-from ..utils import words_to_ignore_list as words_to_ignore
-from ..utils.custom_responses import CustomResponses
+from .utils import words_to_ignore_list as words_to_ignore
+from .utils.custom_responses import CustomResponses
 
 
 def checkSpellingIssues(

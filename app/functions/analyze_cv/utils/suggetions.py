@@ -92,11 +92,14 @@ suggetions = {
         "suggestion": "Explore reputable online platforms to create professional resumes easily. Choose platforms that offer user-friendly interfaces, a variety of templates, and export options for different file formats.",
         "example": {
             "good": [
-                "LinkedIn Resume Builder",
                 "Canva",
-                "Google Docs Templates",
+                "LinkedIn",
+                "Indeed",
+                "Europass",
+                "Zety",
+                "Resume.com",
                 "NovoResume",
-                "Resume Genius",
+                "Overleaf",
             ],
             "bad": [
                 "Third party mobile apps",

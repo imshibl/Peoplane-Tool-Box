@@ -19,7 +19,7 @@ class FirebaseHelper:
     #     },
     # )
 
-    # use this when deploying
+    # USE THIS FOR PRODUCTION
 
     __cred = credentials.Certificate("/etc/secrets/firebase_creds.json")
     __firebase_app = firebase_admin.initialize_app(

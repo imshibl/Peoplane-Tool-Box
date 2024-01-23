@@ -173,9 +173,7 @@ human_languages = [
 ]
 
 
-def extract_languages(resume_text, nlp):
-    doc = nlp(resume_text)
-
+def extract_languages(resume_text):
     extracted_languages = [
         lang
         for lang in human_languages

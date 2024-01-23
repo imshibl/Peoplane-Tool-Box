@@ -48,6 +48,8 @@ async def analyze_cv(
 
     text, page_count = pdf_reader(content)
 
+    # print(text)
+
     ### DATA FINDING & EXTRACTION SECTION
     # Find matches using regex patterns
     name_match = re.search(patterns.name_pattern, text)
@@ -58,6 +60,7 @@ async def analyze_cv(
     education_match = re.search(patterns.education_pattern, text)
     skills_match = re.search(patterns.skills_pattern, text)
     languages_match = re.search(patterns.languages_pattern, text)
+
     hobbies_and_interests_match = re.search(
         patterns.hobbies_and_interests_pattern, text
     )
@@ -100,14 +103,18 @@ async def analyze_cv(
 
     name = clean_name(name)
 
-    human_languages_data = extract_languages(text, nlp)
-    human_languages_list = human_languages_data["languages"]
-
-    if len(human_languages_list) == 0:
+    # LANGUAGES EXTRACTION SECTION
+    if languages_match:
+        languages_data = text[languages_match.end() :]
+        human_languages_data = extract_languages(languages_data)
+        human_languages_list = human_languages_data["languages"]
+        if len(human_languages_list) == 0:
+            has_languages = False
+    else:
         has_languages = False
+        human_languages_list = []
 
     # CATEGORIZATION SECTION
-
     general_info = {
         "name": name,
         "contact_number": contact_number,
@@ -204,7 +211,7 @@ async def analyze_cv(
             {"total_resume_checks_performed": total_resume_checks + 1},
         )
 
-    # RECOMMENDATIONS SECTION
+    # RECOMMENDATIONS/SUGGESTIONS SECTION
     video_recommendations = generate_video_recommendations()
 
     improvement_suggestions = cvSuggetions.generateCustomResumeSuggestions(
@@ -245,11 +252,11 @@ async def analyze_cv(
             "general_info": general_info,
             "must_have": must_have,
             "good_to_have": good_to_have,
-            "human_languages": human_languages_data,
+            "human_languages": human_languages_list,
             "Embedded Links": embedded_links,
             "video_recommendations": video_recommendations,
             "improvement_suggestions": improvement_suggestions,
             "platform_suggestions": platform_suggestions,
-            "imp_message": imp_messages.important_messages[0],
+            "imp_messages": imp_messages.important_messages,
         },
     )

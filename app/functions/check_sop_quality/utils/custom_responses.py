@@ -46,3 +46,53 @@ class CustomResponses:
 
     spelling_issues_found_response = "Spelling or Grammer mistakes found. Some common terms may be flagged. Please review and consider using popular tools like Grammarly, ProWritingAid, Ginger or any online spelling/grammer checkers to ensure your SOP is error-free."
     spelling_issues_not_found_response = "No issues found. Please review and consider using popular tools like Grammarly, ProWritingAid, Ginger or any online spelling/grammer checkers to ensure your SOP is error-free."
+
+    motivation_messages = {
+        "positive": [
+            "Great job! Your statement reflects strong motivation and passion for the field.",
+            "Well done! Your enthusiasm and commitment shine through in your statement.",
+            "Impressive! Your motivation is evident from your thoughtful statement.",
+            "Fantastic! Your dedication and passion align perfectly with the expectations for this opportunity.",
+            "Excellent! It's evident from your statement that you possess the enthusiasm and drive.",
+        ],
+        "neutral": [
+            "Your statement contains some relevant keywords, but consider providing more details about your motivation for a more comprehensive overview.",
+            "There are elements in your statement that touch on motivation. Consider elaborating further for a stronger emphasis on your drive and enthusiasm.",
+            "Your statement has some relevant content, but it could be strengthened by incorporating specific examples of your motivation.",
+        ],
+        "negative": [
+            "I couldn't find specific keywords related to motivation in your statement. Please elaborate on your enthusiasm and passion.",
+            "Your statement lacks clear indications of motivation. Consider revisiting and emphasizing your dedication and enthusiasm.",
+            "It would be beneficial to include more details about your motivation in your statement.",
+            "Your statement is missing keywords related to motivation. Take the opportunity to showcase your enthusiasm and commitment.",
+            "Consider revising your statement to include specific examples that highlight your motivation relevant to this opportunity.",
+        ],
+    }
+
+    experience_messages = {
+        "positive": [
+            "Great job! Your statement reflects valuable experience and a strong background in the field.",
+            "Well done! Your extensive experience and skills is evident from your detailed statement.",
+            "Impressive! Your past roles and achievements demonstrate a wealth of experience in the field.",
+            "Fantastic! Your professional journey showcases a rich history of success and expertise.",
+            "Excellent! It's evident from your statement that you possess the experience and skills required for this program.",
+        ],
+        "neutral": [
+            "Your statement contains some relevant keywords related to experience, but consider providing more specific details for a comprehensive overview.",
+            "There are elements in your statement that touch on experience. Consider elaborating further for a stronger emphasis on your professional background.",
+            "Your statement has some relevant content related to experience, but it could be strengthened by incorporating specific examples of your past roles and achievements.",
+        ],
+        "negative": [
+            "I couldn't find specific keywords related to experience in your statement. Please elaborate on your professional background and past roles.",
+            "Your statement lacks clear indications of experience. Consider revisiting and emphasizing your past roles and achievements in your field.",
+            "It would be beneficial to include more details about your experience in your statement.",
+            "Your statement is missing keywords related to experience. Take the opportunity to showcase your professional background and expertise.",
+            "Consider revising your statement to include specific examples that highlight your experience relevant to this opportunity.",
+        ],
+    }
+
+
+# Get a random message from each category
+# random_positive_message = random.choice(motivation_messages["positive"])
+# random_neutral_message = random.choice(motivation_messages["neutral"])
+# random_negative_message = random.choice(motivation_messages["negative"])

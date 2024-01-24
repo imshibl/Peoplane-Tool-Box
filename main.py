@@ -7,6 +7,7 @@ from app.routes import (
     check_sop_quality_visa,
     feedback,
     root,
+    suggest_tasks,
 )
 from app.routes.user_management import consultancy, user
 
@@ -20,4 +21,5 @@ app.include_router(check_sop_quality_uni.router)
 app.include_router(check_sop_quality_visa.router)
 app.include_router(check_plagiarism.router)
 app.include_router(analyze_cv.router)
+app.include_router(suggest_tasks.router)
 app.include_router(feedback.router)

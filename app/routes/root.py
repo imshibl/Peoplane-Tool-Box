@@ -4,6 +4,13 @@ from fastapi import APIRouter, HTTPException
 from app.utils.error_responses import APIErrorResponses
 
 from ..firebase.firebase_helper import FirebaseHelper
+from ..functions.analyze_cv.utils import imp_messages as cv_analyzer_important_messages
+from ..functions.check_plagiarism.utils import (
+    imp_messages as plagiarism_checker_important_messages,
+)
+from ..functions.check_sop_quality.utils import (
+    imp_messages_uni as uni_sop_checker_important_messages,
+)
 
 router = APIRouter()
 
@@ -46,16 +53,18 @@ def root():
                 "isActive": True,
                 "status": "Available",
                 "no_of_plagiarism_checks_performed": no_of_plagiarism_checks_performed,
+                "more_details": plagiarism_checker_important_messages.important_messages,
             },
             {
                 "name": "Resume Analyzer",
-                "purpose": "For creating polished and effective resumes/cvs",
+                "purpose": "For creating polished and effective resumes.",
                 "description": "Our Resume Analyzer is a user-friendly tool designed to assist you in crafting polished and effective resumes. Tailored for job seekers, this tool employs intelligent algorithms to analyze your resume and provides personalized recommendations and suggestions to help you create a standout CV for job applications.",
                 "version": "1.0",
                 "type": "Free",
                 "isActive": True,
                 "status": "Available",
                 "no_of_resume_checks_performed": no_of_resume_checks_performed,
+                "more_details": cv_analyzer_important_messages.important_messages,
             },
             {
                 "name": "AI Powered University SOP/LOM Quality Checker",
@@ -66,6 +75,7 @@ def root():
                 "isActive": True,
                 "status": "Available",
                 "no_of_quality_checks_performed": no_of_quality_checks_performed,
+                "more_details": uni_sop_checker_important_messages.important_messages,
             },
             {
                 "name": "AI Powered VISA SOP/LOM Quality Checker",
@@ -76,6 +86,23 @@ def root():
                 "isActive": False,
                 "status": "Coming Soon",
                 "no_of_quality_checks_performed": no_of_quality_checks_performed,
+                "more_details": None,
+            },
+            {
+                "name": "Boredom Buster",
+                "purpose": "For providing personalized activity recommendations based on your current location, personality, mood and budget preference",
+                "description": "Boredom Buster is your go-to tool for discovering exciting activities tailored to your preferences. Whether you're an introvert or extrovert, on a tight budget or ready to splurge, this tool suggests handpicked activities and experiences in your current country. Explore new places, make the most of your free time, and create unforgettable memories.",
+                "version": "1.0",
+                "type": "Free",
+                "isActive": True,
+                "status": "Available",
+                "more_details": [
+                    "Discover a variety of activities from quiet nature walks to lively social events.",
+                    "Discover a wide range of activities to suit your mood and personality."
+                    "Choose between free and paid options based on your budget preference.",
+                    "Perfect for solo adventurers, friends, and families looking for personalized recommendations.",
+                    "Enhance your experience in a new city with Boredom Buster, your virtual travel companion!",
+                ],
             },
         ],
         "message": "The Peoplane Tool Box is still under development. it may make mistakes or errors. Consider checking important details yourself or consult professionals for added assurance. Your understanding is appreciated.",

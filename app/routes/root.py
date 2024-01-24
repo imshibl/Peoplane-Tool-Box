@@ -8,14 +8,14 @@ from ..firebase.firebase_helper import FirebaseHelper
 router = APIRouter()
 
 # Check if the English language model is already installed
-if "en_core_web_lg" not in spacy.util.get_installed_models():
+if "en_core_web_md" not in spacy.util.get_installed_models():
     # If it's not installed, download and install it
-    spacy.cli.download("en_core_web_lg")
+    spacy.cli.download("en_core_web_md")
     # Load the model after installation
-    nlp = spacy.load("en_core_web_lg")
+    nlp = spacy.load("en_core_web_md")
 else:
     # If it's already installed, you can simply load it
-    nlp = spacy.load("en_core_web_lg")
+    nlp = spacy.load("en_core_web_md")
 
 
 @router.get("/", tags=["Home"])

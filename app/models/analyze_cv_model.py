@@ -2,10 +2,7 @@ from enum import Enum
 
 from pydantic import BaseModel, EmailStr
 
-
-class UserType(str, Enum):
-    user = "user"
-    consultancy = "consultancy"
+from .shared.user_type_model import UserType
 
 
 class AnalyzeCVModel(BaseModel):

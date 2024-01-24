@@ -1,4 +1,5 @@
 import random
+import re
 
 from fastapi import APIRouter, HTTPException
 
@@ -16,7 +17,7 @@ from ..functions.check_sop_quality.extract_program import (
     extract_education_level_applying_for,
 )
 from ..functions.check_sop_quality.utils.custom_responses import CustomResponses
-from ..models import check_quality_model as sim
+from ..models import check_sop_quality_model as sim
 from ..utils.error_responses import APIErrorResponses
 from .root import nlp
 
@@ -25,8 +26,8 @@ router = APIRouter(
 )
 
 
-@router.post("/check-quality", tags=["Tools"])
-async def check_sop_quality(input: sim.CheckQualityModel):
+@router.post("/check-quality-uni", tags=["Tools"])
+async def check_sop_quality_university(input: sim.CheckSOPQualityModel):
     maintenance_ongoing = FirebaseHelper.maintenance_ref.get()
 
     if maintenance_ongoing == True:
@@ -57,9 +58,23 @@ async def check_sop_quality(input: sim.CheckQualityModel):
     if university_name_list:
         university_name = university_name_list[0]
         uni_name = university_name.lower().split()
+
     else:
-        university_name = ""
+        university_name = None
         uni_name = []
+
+    if university_name.lower() == "university":
+        sop_doc = nlp(input.sop)
+        # Check if "TU" is present in the text
+        tu_present = any(token.text.upper() == "TU" for token in sop_doc)
+        if tu_present:
+            university_pattern = re.compile(
+                r"\b(?:[A-Z][A-Z0-9]*\s)+[A-Z][A-Za-z0-9]*\b"
+            )
+            matches = university_pattern.findall(input.sop)
+            tu_uni_name = matches[0].strip()
+            uni_name.append(tu_uni_name)
+            university_name = tu_uni_name
 
     people_name_list = ed.extract_people_names(input.sop, nlp)
     place_name_list = ed.extract_place_names(input.sop, nlp)
@@ -69,18 +84,14 @@ async def check_sop_quality(input: sim.CheckQualityModel):
     if destination_country_names:
         destination_country_name = destination_country_names[0]
     else:
-        destination_country_name = ""
+        destination_country_name = None
 
     education_level_applying_for = extract_education_level_applying_for(input.sop)
 
     word_count = cwc.check_word_count(input.sop)
 
-    spelling_mistakes_count = csi.checkSpellingIssues(
-        sop_text=input.sop,
-        univeristy_name_list=uni_name,
-        people_name_list=people_name_list,
-        place_name_list=place_name_list,
-        organization_name_list=organization_name_list,
+    spelling_mistakes_count = csi.check_spelling_issues(
+        input.sop, uni_name, people_name_list, place_name_list, organization_name_list
     )
 
     readability = cr.check_readability(input.sop)
@@ -88,21 +99,29 @@ async def check_sop_quality(input: sim.CheckQualityModel):
     motivation = check_for_motivation(input.sop)
     vocabulary_richness = cv.check_vocabulary_richness(input.sop, nlp)
 
-    if university_name == "" and destination_country_name == "":
-        custom_university_message = random.choice(
-            CustomResponses.no_university_name_found_responses
-        )
-        about_univerity_message = f"{custom_university_message}"
-    else:
-        custom_university_message = random.choice(
-            CustomResponses.university_name_found_response_messages
-        )
-        about_univerity_message = f"{custom_university_message} {university_name} in {destination_country_name}."
+    custom_about_uni_message = random.choice(
+        CustomResponses.university_name_found_response_messages
+        if university_name
+        else CustomResponses.no_university_name_found_response_messages
+    )
 
-    if destination_country_name == "":
-        destination_country_name = random.choice(
-            CustomResponses.destination_country_not_found_response_messages
-        )
+    about_univerity_message = (
+        f"{custom_about_uni_message} {university_name}."
+        if university_name
+        else f"{custom_about_uni_message}."
+    )
+
+    custom_about_destination_country_message = random.choice(
+        CustomResponses.destination_country_found_response_messages
+        if destination_country_name
+        else CustomResponses.destination_country_not_found_response_messages
+    )
+
+    destination_country_message = (
+        f"{destination_country_name},{custom_about_destination_country_message}."
+        if destination_country_name
+        else f"{custom_about_destination_country_message}"
+    )
 
     predicted_quality = 2
 
@@ -117,7 +136,7 @@ async def check_sop_quality(input: sim.CheckQualityModel):
         "sop_quality": sop_quality,
         "university": about_univerity_message,
         "applying_for": education_level_applying_for,
-        "destination_country": destination_country_name,
+        "destination_country": destination_country_message,
         "words": word_count,
         "spelling_grammer_mistakes": spelling_mistakes_count,
         "readability": readability,

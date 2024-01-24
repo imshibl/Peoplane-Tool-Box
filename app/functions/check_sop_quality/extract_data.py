@@ -12,7 +12,7 @@ def extract_university_name(sop_text, nlp):
 
     for entity in doc.ents:
         # Check if the entity label is 'ORG' (organization/institution)
-        if entity.label_ == "ORG":  # PERSON
+        if entity.label_ == "ORG":
             # Check if the entity text contains the word "university" (case-insensitive)
             if "university" in entity.text.lower():
                 # Remove special characters using a regular expression

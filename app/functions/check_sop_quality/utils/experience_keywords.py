@@ -2,7 +2,10 @@ experience_keywords = [
     "internship",
     "internships",
     "startup",
+    "start-up",
     "company",
+    "assist",
+    "intern",
     "placed",
     "placement",
     "offer",
@@ -11,33 +14,33 @@ experience_keywords = [
     "role",
     "collaboration",
     "collaborated",
-    "research",
-    "research project",
     "worked",
     "employed",
     "workplace",
     "intern",
     "trainee",
+    "trainning",
     "assisted",
     "apprenticeship",
     "interned",
-    "work experience",
+    "work",
+    "experience",
     "duration",
     "team",
     "trained",
     "junior",
     "senior",
+    "engineer",
+    "service",
+    "management",
+    "manager",
+    "responsibility",
     "colleague",
     "firm",
-    "experience",
     "employment",
     "professional",
     "background",
     "career",
-    "job",
-    "work" "roles",
-    "work",
-    "job",
     "position",
     "role",
     "responsibilities",
@@ -51,32 +54,21 @@ experience_keywords = [
     "education",
     "certifications",
     "awards",
-    "references",
+    "honors",
+    "reference",
     "industry",
-    "relevant",
-    "researc",
+    "research",
     "teamwork",
     "project",
     "corporate",
+    "participation",
+    "extracurricular",
+    "activities",
+    "skills",
+    "workshops",
+    "thesis",
+    "led",
+    "lead",
+    "apprentice",
+    "profession",
 ]
-
-
-# import re
-
-# def detect_experience_keywords(text):
-#     experience_keywords = [
-#         "experience",
-#         "work experience",
-#         "employment history",
-#         # Add more keywords here
-#     ]
-
-#     pattern = r"\b(" + "|".join(experience_keywords) + r")\b"
-#     matches = re.findall(pattern, text, flags=re.IGNORECASE)
-
-#     return matches
-
-# # Example usage
-# text = "I have extensive work experience in software development and project management."
-# matches = detect_experience_keywords(text)
-# print(matches)

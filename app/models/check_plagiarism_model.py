@@ -2,15 +2,12 @@ from enum import Enum
 
 from pydantic import BaseModel, EmailStr
 
+from .shared.user_type_model import UserType
+
 
 class ContentType(str, Enum):
     university = "university"
     visa = "visa"
-
-
-class UserType(str, Enum):
-    user = "user"
-    consultancy = "consultancy"
 
 
 class CheckPlagiarismModel(BaseModel):

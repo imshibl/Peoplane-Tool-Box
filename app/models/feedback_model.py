@@ -15,6 +15,6 @@ class Tools(str, Enum):
 class FeedbackAndRatingModel(BaseModel):
     email: EmailStr
     user_type: UserType
-    feedback: str
+    feedback: str | None
     rating: float
-    tool: Tools
+    tool: Tools | None

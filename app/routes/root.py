@@ -45,7 +45,7 @@ def root():
         "contact_email": "hello@peoplane.com",
         "tools": [
             {
-                "name": "SOP/LOM Plagiarism Checker",
+                "name": "SOP Plagiarism Checker",
                 "purpose": "For checking the authenticity and originality of your Statement of Purpose (SOP) or Letter of Motivation (LOM) used for your University and VISA application",
                 "description": "Our SOP/LOM Plagiarism Checker is an advanced tool designed to ensure the authenticity and originality of your Statement of Purpose (SOP) or Letter of Motivation (LOM). Tailored for prospective students and job seekers, this tool employs cutting-edge technology to meticulously scan and analyze your document, identifying any instances of plagiarism or unintentional content overlap",
                 "version": "1.0",
@@ -67,7 +67,7 @@ def root():
                 "more_details": cv_analyzer_important_messages.important_messages,
             },
             {
-                "name": "AI Powered University SOP/LOM Quality Checker",
+                "name": "AI Powered University SOP Quality Checker",
                 "purpose": "For University applications",
                 "description": "Our AI Powered University SOP/LOM Quality Checker meticulously assesses your University Statement of Purpose (SOP) or Letter of Motivation (LOM). Receive a detailed report to enhance and optimize your application for a stronger university candidacy.",
                 "version": "1.0",
@@ -78,7 +78,7 @@ def root():
                 "more_details": uni_sop_checker_important_messages.important_messages,
             },
             {
-                "name": "AI Powered VISA SOP/LOM Quality Checker",
+                "name": "AI Powered VISA SOP Quality Checker",
                 "purpose": "For VISA applications",
                 "description": "Our AI Powered VISA SOP/LOM quality checker evaluates your Statement of Purpose (SOP) or Letter of Motivation (LOM) for visa applications. Receive a detailed report highlighting areas for improvement, enhancing your chances of visa approval.",
                 "version": "1.0",
@@ -89,13 +89,13 @@ def root():
                 "more_details": None,
             },
             {
-                "name": "Boredom Buster",
+                "name": "Boredom Buster Activity Suggestor",
                 "purpose": "For providing personalized activity recommendations based on your current location, personality, mood and budget preference",
                 "description": "Boredom Buster is your go-to tool for discovering exciting activities tailored to your preferences. Whether you're an introvert or extrovert, on a tight budget or ready to splurge, this tool suggests handpicked activities and experiences in your current country. Explore new places, make the most of your free time, and create unforgettable memories.",
                 "version": "1.0",
                 "type": "Free",
-                "isActive": True,
-                "status": "Available",
+                "isActive": False,
+                "status": "Coming Soon",
                 "more_details": [
                     "Discover a variety of activities from quiet nature walks to lively social events.",
                     "Discover a wide range of activities to suit your mood and personality."

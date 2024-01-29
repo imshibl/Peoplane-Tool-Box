@@ -9,6 +9,7 @@ from ..functions.check_sop_quality import check_spelling_issues as csi
 from ..functions.check_sop_quality import check_vocabulary as cv
 from ..functions.check_sop_quality import check_word_count as cwc
 from ..functions.check_sop_quality import extract_data as ed
+from ..functions.check_sop_quality import get_emotion as ge
 from ..functions.check_sop_quality.check_keywords import (
     check_for_experience,
     check_for_motivation,
@@ -53,6 +54,8 @@ async def check_sop_quality_university(input: sim.CheckSOPQualityModel):
         quality_checks_performed_till_now + 1
     )
 
+    sop_emotions = ge.get_emotion(input.sop)
+
     university_name_list = ed.extract_university_name(input.sop, nlp)
 
     if university_name_list:
@@ -63,24 +66,31 @@ async def check_sop_quality_university(input: sim.CheckSOPQualityModel):
         university_name = None
         uni_name = []
 
-    if university_name.lower() == "university":
-        sop_doc = nlp(input.sop)
-        # Check if "TU" is present in the text
-        tu_present = any(token.text.upper() == "TU" for token in sop_doc)
-        if tu_present:
-            university_pattern = re.compile(
-                r"\b(?:[A-Z][A-Z0-9]*\s)+[A-Z][A-Za-z0-9]*\b"
-            )
-            matches = university_pattern.findall(input.sop)
-            tu_uni_name = matches[0].strip()
-            uni_name.append(tu_uni_name)
-            university_name = tu_uni_name
+    if university_name != None:
+        if university_name.lower() == "university":
+            sop_doc = nlp(input.sop)
+            # Check if "TU" is present in the text
+            tu_present = any(token.text.upper() == "TU" for token in sop_doc)
+            if tu_present:
+                university_pattern = re.compile(
+                    r"\b(?:[A-Z][A-Z0-9]*\s)+[A-Z][A-Za-z0-9]*\b"
+                )
+                matches = university_pattern.findall(input.sop)
+                tu_uni_name = matches[0].strip()
+                uni_name.append(tu_uni_name)
+                university_name = tu_uni_name
 
     people_name_list = ed.extract_people_names(input.sop, nlp)
     place_name_list = ed.extract_place_names(input.sop, nlp)
     organization_name_list = ed.extract_organization_names(input.sop, nlp)
 
-    destination_country_names = ed.extract_destination_country_names(input.sop, nlp)
+    destination_countries_list = ed.extract_destination_country_names(input.sop, nlp)
+    destination_country_names = [
+        country
+        for country in destination_countries_list
+        if country != input.home_country
+    ]
+    print(destination_country_names)
     if destination_country_names:
         destination_country_name = destination_country_names[0]
     else:
@@ -137,6 +147,7 @@ async def check_sop_quality_university(input: sim.CheckSOPQualityModel):
         "university": about_univerity_message,
         "applying_for": education_level_applying_for,
         "destination_country": destination_country_message,
+        "sop_sentiments": sop_emotions,
         "words": word_count,
         "spelling_grammer_mistakes": spelling_mistakes_count,
         "readability": readability,

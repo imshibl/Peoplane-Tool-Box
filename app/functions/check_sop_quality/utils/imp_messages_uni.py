@@ -1,6 +1,6 @@
 important_messages = [
     "Our Experimental University SOP Quality Checker is a cutting-edge tool leverages advanced AI technologies to assist you in evaluating the quality of your Statement of Purpose (SOP) for university applications.",
-    "Our AI-powered algorithms analyze various aspects of your SOP, including readability, vocabulary richness, and keywords. It provides experimental insights to help you enhance the overall quality and effectiveness of your statement.",
+    "Our AI-powered algorithms analyze various aspects of your SOP, including readability, vocabulary richness, sentiment analysis and keywords. It provides experimental insights to help you enhance the overall quality and effectiveness of your statement.",
     "Utilize the experimental AI suggestions provided to optimize your SOP content. The tool offers recommendations on improving language use, highlighting key achievements, and ensuring alignment with academic standards.",
     "While the AI technology is experimental and innovative, it's important to remember that human insight is invaluable. Consider seeking feedback from mentors, professors, or colleagues to complement the experimental AI-driven suggestions and ensure a well-rounded evaluation.",
     "Our experimental AI analyzes not only grammar and syntax but also the depth of your content. Make sure your SOP communicates your passion, experiences, and aspirations clearly to create a compelling narrative.",

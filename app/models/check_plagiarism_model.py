@@ -1,17 +1,12 @@
-from enum import Enum
-
 from pydantic import BaseModel, EmailStr
 
+from app.models.shared.sop_type_model import SopType
+
 from .shared.user_type_model import UserType
-
-
-class ContentType(str, Enum):
-    university = "university"
-    visa = "visa"
 
 
 class CheckPlagiarismModel(BaseModel):
     content: str
     email: EmailStr
-    type: ContentType
+    sop_type: SopType
     user_type: UserType

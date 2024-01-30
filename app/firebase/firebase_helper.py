@@ -39,7 +39,7 @@ class FirebaseHelper:
 
     cv_collections_ref = firestore_db.collection("CV_Collections")
 
-    maintenance_ref = db.reference("/isUnderMaintenance")
+    maintenance_ref = db.reference("/is_under_maintenance")
     quality_checks_performed_ref = db.reference("/quality_checks_performed")
     plagiarism_checks_performed_ref = db.reference("/plagiarism_checks_performed")
     resume_checks_performed_ref = db.reference("/resume_checks_performed")

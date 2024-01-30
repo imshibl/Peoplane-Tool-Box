@@ -54,7 +54,7 @@ async def check_sop_quality_university(input: sim.CheckSOPQualityModel):
         quality_checks_performed_till_now + 1
     )
 
-    sop_emotions = ge.get_emotion(input.sop)
+    sop_emotions = ge.get_emotions(input.sop)
 
     university_name_list = ed.extract_university_name(input.sop, nlp)
 
@@ -90,7 +90,7 @@ async def check_sop_quality_university(input: sim.CheckSOPQualityModel):
         for country in destination_countries_list
         if country != input.home_country
     ]
-    print(destination_country_names)
+
     if destination_country_names:
         destination_country_name = destination_country_names[0]
     else:

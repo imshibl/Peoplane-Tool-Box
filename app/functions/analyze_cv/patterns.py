@@ -52,5 +52,5 @@ class RegexPatterns:
     )
 
     declaration_pattern = re.compile(
-        r"D\s*e\s*c\s*l\s*a\s*r\s*a\s*t\s*i\s*o\s*n|D\s*E\s*C\s*L\s*A\s*R\s*A\s*T\s*I\s*O\s*N|hereby|declare|best\s*of\s*my\s*knowledge|appreciate\s*you\s*taking\s*the\s*time\s*to\s*look\s*over\s*my\s*qualifications(?:\s*and\s*experience)?|get\s*in\s*touch\s*with\s*me|hesitate|I\s*appreciate\s*your\s*time|Thank\s*you|thank\s*you"
+        r"D\s*e\s*c\s*l\s*a\s*r\s*a\s*t\s*i\s*o\s*n|D\s*E\s*C\s*L\s*A\s*R\s*A\s*T\s*I\s*O\s*N|hereby|declare|best\s*of\s*my\s*knowledge|appreciate\s*you\s*taking\s*the\s*time\s*to\s*look\s*over\s*my\s*qualifications(?:\s*and\s*experience)?|get\s*in\s*touch\s*with\s*me|hesitate|I\s*appreciate\s*your\s*time|Thank\s*you|thank\s*you|above\s*information|I\s*certify|any\s*clarifications"
     )

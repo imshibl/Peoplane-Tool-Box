@@ -3,24 +3,24 @@ import re
 
 from fastapi import APIRouter, HTTPException
 
-from ..firebase.firebase_helper import FirebaseHelper
-from ..functions.check_sop_quality import check_readability as cr
-from ..functions.check_sop_quality import check_spelling_issues as csi
-from ..functions.check_sop_quality import check_vocabulary as cv
-from ..functions.check_sop_quality import check_word_count as cwc
-from ..functions.check_sop_quality import extract_data as ed
-from ..functions.check_sop_quality import get_emotion as ge
-from ..functions.check_sop_quality.check_keywords import (
+from ...features.check_sop_quality import check_readability as cr
+from ...features.check_sop_quality import check_spelling_issues as csi
+from ...features.check_sop_quality import check_vocabulary as cv
+from ...features.check_sop_quality import check_word_count as cwc
+from ...features.check_sop_quality import extract_data as ed
+from ...features.check_sop_quality import get_emotion as ge
+from ...features.check_sop_quality.check_keywords import (
     check_for_experience,
     check_for_motivation,
 )
-from ..functions.check_sop_quality.extract_program import (
+from ...features.check_sop_quality.extract_program import (
     extract_education_level_applying_for,
 )
-from ..functions.check_sop_quality.utils.custom_responses import CustomResponses
-from ..models import check_sop_quality_model as sim
-from ..utils.error_responses import APIErrorResponses
-from .root import nlp
+from ...features.check_sop_quality.utils.custom_responses import CustomResponses
+from ...firebase.firebase_helper import FirebaseHelper
+from ...models import check_sop_quality_model as sim
+from ...utils.error_responses import APIErrorResponses
+from ..root import nlp
 
 router = APIRouter(
     prefix="/tool",

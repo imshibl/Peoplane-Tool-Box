@@ -2,10 +2,10 @@ from fastapi import APIRouter, HTTPException
 
 from app.utils.error_responses import APIErrorResponses
 
-from ..firebase.firebase_helper import FirebaseHelper
-from ..functions.check_plagiarism.check_plagiarism import check_plagiarism
-from ..models.check_plagiarism_model import CheckPlagiarismModel
-from .root import nlp
+from ...features.check_plagiarism.check_plagiarism import check_plagiarism
+from ...firebase.firebase_helper import FirebaseHelper
+from ...models.check_plagiarism_model import CheckPlagiarismModel
+from ..root import nlp
 
 router = APIRouter(prefix="/tool")
 

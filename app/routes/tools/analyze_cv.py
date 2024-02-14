@@ -7,16 +7,16 @@ from pydantic import EmailStr
 from app.models.analyze_cv_model import UserType
 from app.utils.error_responses import APIErrorResponses
 
-from ..firebase.firebase_helper import FirebaseHelper
-from ..functions.analyze_cv.check_name import clean_name, is_valid_text
-from ..functions.analyze_cv.extract_languages import extract_languages
-from ..functions.analyze_cv.get_embedded_links import extract_embedded_links
-from ..functions.analyze_cv.patterns import RegexPatterns as patterns
-from ..functions.analyze_cv.read_pdf import pdf_reader
-from ..functions.analyze_cv.recommendations import generate_video_recommendations
-from ..functions.analyze_cv.suggestions import ResumeSuggetions as cvSuggetions
-from ..functions.analyze_cv.utils import imp_messages
-from .root import nlp
+from ...features.analyze_cv.check_name import clean_name, is_valid_text
+from ...features.analyze_cv.extract_languages import extract_languages
+from ...features.analyze_cv.get_embedded_links import extract_embedded_links
+from ...features.analyze_cv.patterns import RegexPatterns as patterns
+from ...features.analyze_cv.read_pdf import pdf_reader
+from ...features.analyze_cv.recommendations import generate_video_recommendations
+from ...features.analyze_cv.suggestions import ResumeSuggetions as cvSuggetions
+from ...features.analyze_cv.utils import imp_messages
+from ...firebase.firebase_helper import FirebaseHelper
+from ..root import nlp
 
 router = APIRouter(prefix="/tool")
 

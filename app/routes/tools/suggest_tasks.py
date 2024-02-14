@@ -3,8 +3,8 @@ from enum import Enum
 
 from fastapi import APIRouter
 
-from ..functions.suggest_tasks.tasks_database import tasks_database
-from ..models.suggest_tasks_model import TaskSuggestion
+from ...features.suggest_tasks.tasks_database import tasks_database
+from ...models.suggest_tasks_model import TaskSuggestion
 
 router = APIRouter()
 

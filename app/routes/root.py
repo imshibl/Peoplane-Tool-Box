@@ -3,14 +3,14 @@ from fastapi import APIRouter, HTTPException
 
 from app.utils.error_responses import APIErrorResponses
 
-from ..firebase.firebase_helper import FirebaseHelper
-from ..functions.analyze_cv.utils import imp_messages as cv_analyzer_important_messages
-from ..functions.check_plagiarism.utils import (
+from ..features.analyze_cv.utils import imp_messages as cv_analyzer_important_messages
+from ..features.check_plagiarism.utils import (
     imp_messages as plagiarism_checker_important_messages,
 )
-from ..functions.check_sop_quality.utils import (
+from ..features.check_sop_quality.utils import (
     imp_messages_uni as uni_sop_checker_important_messages,
 )
+from ..firebase.firebase_helper import FirebaseHelper
 
 router = APIRouter()
 
@@ -71,7 +71,7 @@ def root():
                 "purpose": "For University applications",
                 "description": "Our AI Powered University SOP/LOM Quality Checker meticulously assesses your University Statement of Purpose (SOP) or Letter of Motivation (LOM). Receive a detailed report to enhance and optimize your application for a stronger university candidacy.",
                 "version": "1.0",
-                "type": "Premium",
+                "type": "Paid",
                 "isActive": True,
                 "status": "Available",
                 "no_of_quality_checks_performed": no_of_quality_checks_performed,
@@ -82,7 +82,7 @@ def root():
                 "purpose": "For VISA applications",
                 "description": "Our AI Powered VISA SOP/LOM quality checker evaluates your Statement of Purpose (SOP) or Letter of Motivation (LOM) for visa applications. Receive a detailed report highlighting areas for improvement, enhancing your chances of visa approval.",
                 "version": "1.0",
-                "type": "Premium",
+                "type": "Paid",
                 "isActive": False,
                 "status": "Coming Soon",
                 "no_of_quality_checks_performed": no_of_quality_checks_performed,

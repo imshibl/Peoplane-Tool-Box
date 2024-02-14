@@ -5,10 +5,10 @@ from app.routes import (
     check_plagiarism,
     check_sop_quality_uni,
     check_sop_quality_visa,
-    feedback,
     root,
     suggest_tasks,
 )
+from app.routes.feeback_and_rating import feedback
 from app.routes.user_management import consultancy, user
 
 app = FastAPI()

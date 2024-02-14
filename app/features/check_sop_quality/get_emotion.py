@@ -9,6 +9,7 @@ API_URL = "https://api-inference.huggingface.co/models/arpanghoshal/EmoRoBERTa"
 headers = {"Authorization": "Bearer " + os.getenv("SOP_EMOTION_API_KEY")}
 
 
+# Split the SOP into three parts
 def split_text(text):
     # Split the text into words
     words = text.split()
@@ -36,6 +37,7 @@ def get_emotions(sop):
     starting, middle, ending = split_text(sop)
 
     try:
+        # Get starting part emotion
         get_starting_emotion = requests.post(
             API_URL,
             headers=headers,
@@ -46,6 +48,7 @@ def get_emotions(sop):
 
         start_emotion = get_starting_emotion.json()[0][0]["label"]
 
+        # Get middle part emotion
         get_middle_emotion = requests.post(
             API_URL,
             headers=headers,
@@ -56,6 +59,7 @@ def get_emotions(sop):
 
         middle_emotion = get_middle_emotion.json()[0][0]["label"]
 
+        # Get ending part emotion
         get_ending_emotion = requests.post(
             API_URL,
             headers=headers,

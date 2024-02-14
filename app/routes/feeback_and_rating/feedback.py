@@ -4,8 +4,8 @@ from fastapi import APIRouter, HTTPException, WebSocket
 
 from app.utils.error_responses import APIErrorResponses
 
-from ..firebase.firebase_helper import FirebaseHelper
-from ..models.feedback_model import FeedbackAndRatingModel
+from ...firebase.firebase_helper import FirebaseHelper
+from ...models.feedback_model import FeedbackAndRatingModel
 
 router = APIRouter()
 

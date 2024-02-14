@@ -16,9 +16,9 @@ def extract_education_level_applying_for(sop_text):
     if any(keyword in sop_text.lower() for keyword in phd_keywords):
         education_level_applying_for = "PhD"
     elif any(keyword in sop_text.lower() for keyword in master_keywords):
-        education_level_applying_for = "Masters"
+        education_level_applying_for = "Masters Degree"
     elif any(keyword in sop_text.lower() for keyword in bachelor_keywords):
-        education_level_applying_for = "Bachelor"
+        education_level_applying_for = "Bachelors Degree"
     else:
         return None  # Educational level not detected
 

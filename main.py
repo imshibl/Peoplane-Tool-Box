@@ -1,14 +1,14 @@
 from fastapi import FastAPI
 
-from app.routes import (
+from app.routes import root
+from app.routes.feeback_and_rating import feedback
+from app.routes.tools import (
     analyze_cv,
     check_plagiarism,
     check_sop_quality_uni,
     check_sop_quality_visa,
-    root,
     suggest_tasks,
 )
-from app.routes.feeback_and_rating import feedback
 from app.routes.user_management import consultancy, user
 
 app = FastAPI()

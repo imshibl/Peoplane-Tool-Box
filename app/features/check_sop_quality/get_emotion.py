@@ -36,6 +36,8 @@ def split_text(text):
 def get_emotions(sop):
     starting, middle, ending = split_text(sop)
 
+    emotions_list = []
+
     try:
         # Get starting part emotion
         get_starting_emotion = requests.post(
@@ -48,6 +50,12 @@ def get_emotions(sop):
 
         start_emotion = get_starting_emotion.json()[0][0]["label"]
 
+        emotions_list.append(start_emotion)
+
+    except Exception as e:
+        print(e)
+
+    try:
         # Get middle part emotion
         get_middle_emotion = requests.post(
             API_URL,
@@ -59,6 +67,12 @@ def get_emotions(sop):
 
         middle_emotion = get_middle_emotion.json()[0][0]["label"]
 
+        emotions_list.append(middle_emotion)
+
+    except Exception as e:
+        print(e)
+
+    try:
         # Get ending part emotion
         get_ending_emotion = requests.post(
             API_URL,
@@ -70,11 +84,9 @@ def get_emotions(sop):
 
         end_emotion = get_ending_emotion.json()[0][0]["label"]
 
-        return [
-            start_emotion,
-            middle_emotion,
-            end_emotion,
-        ]
+        emotions_list.append(end_emotion)
 
     except Exception as e:
-        return []
+        print(e)
+
+    return emotions_list

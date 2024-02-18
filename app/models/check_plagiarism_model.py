@@ -6,7 +6,7 @@ from .shared.user_type_model import UserType
 
 
 class CheckPlagiarismModel(BaseModel):
-    content: str
+    sop: str
     email: EmailStr
     sop_type: SopType
     user_type: UserType

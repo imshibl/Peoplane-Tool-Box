@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
+from app.models.shared.user_type_model import UserType
 from app.utils.error_responses import APIErrorResponses
 
 from ...features.check_plagiarism.check_plagiarism import check_plagiarism
@@ -19,9 +20,9 @@ def check_for_plagiarism(input: CheckPlagiarismModel):
             status_code=503, detail=APIErrorResponses.underMaintenanceErrorResponse
         )
 
-    if input.user_type == "user":
+    if input.user_type == UserType.user:
         user = FirebaseHelper.get_user(input.email)
-    elif input.user_type == "consultancy":
+    elif input.user_type == UserType.consultancy:
         user = FirebaseHelper.get_consultancy(input.email)
 
     if len(user) == 0:
@@ -29,7 +30,7 @@ def check_for_plagiarism(input: CheckPlagiarismModel):
             status_code=404, detail=APIErrorResponses.userNotFoundErrorResponse
         )
 
-    if input.content == "" or len(input.content) < 100:
+    if input.sop == "" or len(input.sop) < 100:
         raise HTTPException(
             status_code=404, detail=APIErrorResponses.contentIsShortOrEmptyErrorResponse
         )
@@ -46,12 +47,12 @@ def check_for_plagiarism(input: CheckPlagiarismModel):
     user_data = user[0].to_dict()
     total_plagiarism_checks = user_data["total_plagiarism_checks_performed"]
 
-    if input.user_type == "user":
+    if input.user_type == UserType.user:
         FirebaseHelper.update_user(
             input.email,
-            {"overall_plagiarism_checks_performed": total_plagiarism_checks + 1},
+            {"total_plagiarism_checks_performed": total_plagiarism_checks + 1},
         )
-    elif input.user_type == "consultancy":
+    elif input.user_type == UserType.consultancy:
         FirebaseHelper.update_consultancy(
             input.email,
             {"total_plagiarism_checks_performed": total_plagiarism_checks + 1},

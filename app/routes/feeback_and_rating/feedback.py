@@ -1,6 +1,5 @@
-import asyncio
 
-from fastapi import APIRouter, HTTPException, WebSocket
+from fastapi import APIRouter, HTTPException
 
 from app.utils.error_responses import APIErrorResponses
 

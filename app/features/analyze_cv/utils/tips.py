@@ -25,4 +25,11 @@ tips_to_improve_resume = [
             ],
         },
     },
+    {
+        "tip": "Don't add unnecessary spacing between letters. Use consistent spacing to enhance readability. Over spacing between letters make it hard for ATS systems analyze your resume correctly.",
+        "example": {
+            "good": ["Experience", "Educations", "Skills"],
+            "bad": ["E x p e r i e n c e", "E d u c a t i o n s", "S k i l l s"],
+        },
+    },
 ]

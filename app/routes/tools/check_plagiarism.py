@@ -15,7 +15,7 @@ router = APIRouter(prefix="/tool")
 def check_for_plagiarism(input: CheckPlagiarismModel):
     maintenance_ongoing = FirebaseHelper.maintenance_ref.get()
 
-    if maintenance_ongoing == True:
+    if maintenance_ongoing is True:
         raise HTTPException(
             status_code=503, detail=APIErrorResponses.underMaintenanceErrorResponse
         )

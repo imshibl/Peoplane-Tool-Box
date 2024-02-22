@@ -1,7 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import EmailStr
 
-from app.utils.error_responses import APIErrorResponses
 
 from ...firebase.firebase_helper import FirebaseHelper
 from ...models.consultancy_model import ConsultancyUserModel

@@ -29,7 +29,7 @@ else:
 def root():
     maintenance_ongoing = FirebaseHelper.maintenance_ref.get()
 
-    if maintenance_ongoing == True:
+    if maintenance_ongoing is True:
         raise HTTPException(
             status_code=503, detail=APIErrorResponses.underMaintenanceErrorResponse
         )

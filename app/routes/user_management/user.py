@@ -65,6 +65,11 @@ async def update_user(user: UserModel, email: EmailStr):
 async def delete_user(email: EmailStr):
     isUserAvailable = FirebaseHelper.user_exists(email)
 
+    if not isUserAvailable:
+        raise HTTPException(
+            status_code=404, detail=APIErrorResponses.userNotFoundErrorResponse
+        )
+
     FirebaseHelper.delete_user(email)
     return {
         "message": "Account associated with {} deleted successfully".format(email),

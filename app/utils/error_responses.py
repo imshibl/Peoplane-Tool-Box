@@ -16,7 +16,7 @@ class APIErrorResponses:
 
     userNotFoundErrorResponse = {
         "error": "User not found",
-        "message": "User does not exist",
+        "message": "User does not exist.Please check your email and try again.",
     }
 
     noPermissionErrorResponse = {

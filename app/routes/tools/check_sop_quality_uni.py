@@ -31,12 +31,12 @@ router = APIRouter(
 async def check_sop_quality_university(input: sim.CheckSOPQualityModel):
     maintenance_ongoing = FirebaseHelper.maintenance_ref.get()
 
-    if maintenance_ongoing == True:
+    if maintenance_ongoing is True:
         raise HTTPException(
             status_code=503, detail=APIErrorResponses.underMaintenanceErrorResponse
         )
 
-    if input.is_premium_user == False:
+    if input.is_premium_user is False:
         raise HTTPException(
             status_code=404, detail=APIErrorResponses.notAPremiumUserErrorResponse
         )
@@ -66,7 +66,7 @@ async def check_sop_quality_university(input: sim.CheckSOPQualityModel):
         university_name = None
         uni_name = []
 
-    if university_name != None:
+    if university_name is not None:
         if university_name.lower() == "university":
             sop_doc = nlp(input.sop)
             # Check if "TU" is present in the text

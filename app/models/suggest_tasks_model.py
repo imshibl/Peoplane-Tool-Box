@@ -31,12 +31,12 @@ class MoodEnum(str, Enum):
     ADVENTUROUS = "adventurous"
     CURIOUS = "curious"
     ANXIOUS = "anxious"
-    SAD = ("sad",)
-    TENSE = ("tense",)
-    EXCITED = ("excited",)
-    AFRAID = ("afraid",)
-    ANGRY = ("angry",)
-    CONFUSED = ("confused",)
+    SAD = "sad"
+    TENSE = "tense"
+    EXCITED = "excited"
+    AFRAID = "afraid"
+    ANGRY = "angry"
+    CONFUSED = "confused"
 
 
 class TaskSuggestion(BaseModel):

@@ -1,7 +1,7 @@
 from .utils.suggetions import suggetions
 
 
-class ResumeSuggetions:
+class CustomResumeResponses:
     def generateCustomResumeSuggestions(
         name,
         mobile_number,

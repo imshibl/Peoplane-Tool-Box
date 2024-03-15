@@ -12,3 +12,4 @@ pydantic[email]
 pdfminer
 PyPDF2
 python-multipart
+dotenv

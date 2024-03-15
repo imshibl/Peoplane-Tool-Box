@@ -8,16 +8,17 @@ from app.models.analyze_cv_model import UserType
 from app.utils.error_responses import APIErrorResponses
 
 from ...features.analyze_cv.check_name import clean_name, is_valid_text
-from ...features.analyze_cv.custom_responses import \
-    CustomResumeResponses as cvSuggetions
+from ...features.analyze_cv.custom_responses import (
+    CustomResumeResponses as cvSuggetions,
+)
 from ...features.analyze_cv.extract_languages import extract_languages
 from ...features.analyze_cv.get_embedded_links import extract_embedded_links
 from ...features.analyze_cv.patterns import RegexPatterns as patterns
 from ...features.analyze_cv.read_pdf import pdf_reader
-from ...features.analyze_cv.recommendations import \
-    generate_video_recommendations
+from ...features.analyze_cv.recommendations import generate_video_recommendations
 from ...features.analyze_cv.utils import imp_messages
 from ...firebase.firebase_helper import FirebaseHelper
+from ...utils.const import messages
 from ..root import nlp
 
 router = APIRouter(prefix="/tool")
@@ -49,8 +50,6 @@ async def analyze_cv(
     content = await cv.read()
 
     text, page_count = pdf_reader(content)
-
-   
 
     ### DATA FINDING & EXTRACTION SECTION
     # Find matches using regex patterns
@@ -247,7 +246,8 @@ async def analyze_cv(
         "about_pages_message": about_number_of_pages_message,
     }
 
-    return {
+    return (
+        {
             "overall_score": resume_score,
             "max_score": 100,
             "general_info": general_info,
@@ -259,5 +259,6 @@ async def analyze_cv(
             "improvement_suggestions": improvement_suggestions,
             "platform_suggestions": platform_suggestions,
             "imp_messages": imp_messages.important_messages,
+            "feedback_message": messages.ask_feedback_message,
         },
-    
+    )

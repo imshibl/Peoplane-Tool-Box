@@ -19,6 +19,7 @@ from ...features.check_sop_quality.extract_program import (
 from ...features.check_sop_quality.utils.custom_responses import CustomResponses
 from ...firebase.firebase_helper import FirebaseHelper
 from ...models import check_sop_quality_model as sim
+from ...utils.const import messages
 from ...utils.error_responses import APIErrorResponses
 from ..root import nlp
 
@@ -154,6 +155,7 @@ async def check_sop_quality_university(input: sim.CheckSOPQualityModel):
         "experience_keywords": experience,
         "motivation_keywords": motivation,
         "vocabulary_richness": vocabulary_richness,
+        "feedback_message": messages.ask_feedback_message,
     }
 
     return success_response

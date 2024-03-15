@@ -7,12 +7,10 @@ from app.routes.tools import (
     check_plagiarism,
     check_sop_quality_uni,
     check_sop_quality_visa,
-    suggest_tasks,
 )
 from app.routes.user_management import consultancy, user
 
 app = FastAPI()
-
 
 app.include_router(root.router)
 app.include_router(user.router)
@@ -21,5 +19,4 @@ app.include_router(check_sop_quality_uni.router)
 app.include_router(check_sop_quality_visa.router)
 app.include_router(check_plagiarism.router)
 app.include_router(analyze_cv.router)
-app.include_router(suggest_tasks.router)
 app.include_router(feedback.router)

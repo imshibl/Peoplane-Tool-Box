@@ -1,3 +1,4 @@
+
 from textstat import textstat
 
 
@@ -16,7 +17,10 @@ def check_readability(text):
             12,
             "Intermediate",
         ): "Intermediate level text. Easily understood by an average college/high school student.",
-        (0, "Basic"): "Easily understood by an average school student.",
+        (
+            0,
+            "Basic",
+        ): "Easily understood by an average school student.",
     }
     for threshold, level in readability_levels:
         if automated_readability_index > threshold:

@@ -1,13 +1,17 @@
 import os
 
-
 import requests
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 API_URL = "https://api-inference.huggingface.co/models/arpanghoshal/EmoRoBERTa"
-# headers = {"Authorization": "Bearer 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"}
+
+headers = {"Authorization": os.getenv("EmoRoBERTa_API_KEY")}
 
 # USE ON PRODUCTION
-headers = {"Authorization": "Bearer " + os.getenv("SOP_EMOTION_API_KEY")}
+# headers = {"Authorization": "Bearer " + os.getenv("SOP_EMOTION_API_KEY")}
 
 
 # Split the SOP into three parts

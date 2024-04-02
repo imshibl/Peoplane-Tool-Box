@@ -9,7 +9,7 @@ from firebase_admin import credentials, db, firestore, storage
 
 class FirebaseHelper:
     # __cred = credentials.Certificate(
-    #     "C:\\Users\\bil\\Desktop\\Peoplane Tool Box\\firebase_creds.json"
+    #     "C:\\Users\\Shibu\\Desktop\\Peoplane-Tool-Box\\firebase_creds.json"
     # )
     # __firebase_app = firebase_admin.initialize_app(
     #     __cred,

@@ -11,6 +11,7 @@ from ...features.analyze_cv.check_name import clean_name, is_valid_text
 from ...features.analyze_cv.custom_responses import (
     CustomResumeResponses as cvSuggetions,
 )
+from ...features.common import get_read_time as read_time
 from ...features.analyze_cv.extract_languages import extract_languages
 from ...features.analyze_cv.get_embedded_links import extract_embedded_links
 from ...features.analyze_cv.patterns import RegexPatterns as patterns
@@ -179,19 +180,19 @@ async def analyze_cv(
     resume_score = round(overall_score)
 
     # RESUME UPLOADING SECTION
-    try:
-        current_datetime = datetime.datetime.now()
+    # try:
+    #     current_datetime = datetime.datetime.now()
 
-        # Construct the new filename with readable date and time
-        formatted_date = current_datetime.strftime("%d-%m-%Y")
-        formatted_time = current_datetime.strftime("%I:%M%p")
+    #     # Construct the new filename with readable date and time
+    #     formatted_date = current_datetime.strftime("%d-%m-%Y")
+    #     formatted_time = current_datetime.strftime("%I:%M%p")
 
-        new_filename = f"resumes/{formatted_date}_{formatted_time}_{cv.filename}"
+    #     new_filename = f"resumes/{formatted_date}_{formatted_time}_{cv.filename}"
 
-        # Upload the file using the separate function
-        FirebaseHelper.upload_cv_to_storage(cv.file, new_filename, cv.content_type)
-    except Exception as e:
-        print(e)
+    #     # Upload the file using the separate function
+    #     FirebaseHelper.upload_cv_to_storage(cv.file, new_filename, cv.content_type)
+    # except Exception as e:
+    #     print(e)
 
     #  # update the number of resume checks performed (int) on admin side
     resume_checks_performed_till_now = FirebaseHelper.resume_checks_performed_ref.get()
@@ -246,10 +247,15 @@ async def analyze_cv(
         "about_pages_message": about_number_of_pages_message,
     }
 
+    time_take_to_read_resume = read_time.calculate_reading_time(
+        text
+    )
+
     return (
         {
             "overall_score": resume_score,
             "max_score": 100,
+            "average_time_to_read_resume": time_take_to_read_resume,
             "general_info": general_info,
             "must_have": must_have,
             "good_to_have": good_to_have,

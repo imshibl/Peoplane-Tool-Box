@@ -14,6 +14,8 @@ from app.routes.user_management import consultancy, user
 app = FastAPI()
 
 origins = [
+    "https://peoplane"
+    "https://peoplane.com"
     "http://localhost",
     "http://localhost:5173",
 ]

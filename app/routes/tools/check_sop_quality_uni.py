@@ -16,6 +16,7 @@ from ...features.check_sop_quality.check_keywords import (
 from ...features.check_sop_quality.extract_program import (
     extract_education_level_applying_for,
 )
+from ...features.common import get_read_time as read_time
 from ...features.check_sop_quality.utils.custom_responses import CustomResponses
 from ...firebase.firebase_helper import FirebaseHelper
 from ...models import check_sop_quality_model as sim
@@ -134,6 +135,10 @@ async def check_sop_quality_university(input: sim.CheckSOPQualityModel):
         else f"{custom_about_destination_country_message}"
     )
 
+    time_take_to_read_sop = read_time.calculate_reading_time(
+        input.sop
+    )
+
     predicted_quality = 2
 
     if predicted_quality == 0:
@@ -144,6 +149,7 @@ async def check_sop_quality_university(input: sim.CheckSOPQualityModel):
         sop_quality = "Poor"
 
     success_response = {
+        "average_time_to_read_sop": time_take_to_read_sop,
         "sop_quality": sop_quality,
         "university": about_univerity_message,
         "applying_for": education_level_applying_for,

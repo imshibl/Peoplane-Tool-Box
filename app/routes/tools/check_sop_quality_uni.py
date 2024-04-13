@@ -8,7 +8,7 @@ from ...features.check_sop_quality import check_spelling_issues as csi
 from ...features.check_sop_quality import check_vocabulary as cv
 from ...features.check_sop_quality import check_word_count as cwc
 from ...features.check_sop_quality import extract_data as ed
-from ...features.check_sop_quality import get_emotion as ge
+from ...features.common import get_emotion as ge
 from ...features.check_sop_quality.check_keywords import (
     check_for_experience,
     check_for_motivation,
@@ -138,6 +138,14 @@ async def check_sop_quality_university(input: sim.CheckSOPQualityModel):
     time_take_to_read_sop = read_time.calculate_reading_time(
         input.sop
     )
+    
+    # def classify_quality(word_count, readability, spelling_errors, experience_keywords, motivation_keywords, vocab_richness):
+    # if word_count > 700 and word_count < 1400 and readability > 12 and spelling_errors < 10 and experience_keywords >= 1 and motivation_keywords >=2 and vocab_richness >= 0.40:
+    #     return 'Excellent'
+    # elif word_count > 500 and word_count < 1500 and readability >= 10 and spelling_errors <= 15 and motivation_keywords >=2 and vocab_richness >= 0.35:
+    #     return 'Good'
+    # else:
+    #     return 'Poor'
 
     predicted_quality = 2
 

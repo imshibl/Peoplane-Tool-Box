@@ -9,6 +9,6 @@ def calculate_reading_time(text, words_per_minute=265):
     minutes = num_words / words_per_minute
     if minutes < 1:
         seconds = minutes * 60
-        return "{:.2f} seconds".format(seconds)
+        return {"time":"{:.2f}".format(seconds) , "type": "seconds"}
     else:
-        return "{:.2f} minutes".format(minutes)
+        return {"time": "{:.2f}".format(minutes), "type": "minutes"}

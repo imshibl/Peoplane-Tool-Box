@@ -146,6 +146,8 @@ async def check_sop_quality_university(input: sim.CheckSOPQualityModel):
     #     return 'Good'
     # else:
     #     return 'Poor'
+    
+    # wordcount = word_count[0]
 
     predicted_quality = 2
 

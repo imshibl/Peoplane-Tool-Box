@@ -44,19 +44,8 @@ def root():
         "owner": "Peoplane Technologies PVT LTD",
         "contact_email": "hello@peoplane.com",
         "tools": [
-            {
-                "name": "SOP Plagiarism Checker",
-                "purpose": "For checking the authenticity and originality of your Statement of Purpose (SOP) or Letter of Motivation (LOM) used for your University and VISA application",
-                "description": "Our SOP/LOM Plagiarism Checker is an advanced tool designed to ensure the authenticity and originality of your Statement of Purpose (SOP) or Letter of Motivation (LOM). Tailored for prospective students and job seekers, this tool employs cutting-edge technology to meticulously scan and analyze your document, identifying any instances of plagiarism or unintentional content overlap",
-                "version": "1.0",
-                "type": "Free",
-                "isFree": True,
-                "isActive": False,
-                "status": "Coming Soon",
-                "no_of_plagiarism_checks_performed": no_of_plagiarism_checks_performed,
-                "more_details": plagiarism_checker_important_messages.important_messages,
-            },
-            {
+             {
+                "id":1,
                 "name": "Resume Analyzer",
                 "purpose": "For creating polished and effective resumes.",
                 "description": "Our Resume Analyzer is a user-friendly tool designed to assist you in crafting polished and effective resumes. Tailored for job seekers, this tool employs intelligent algorithms to analyze your resume and provides personalized recommendations and suggestions to help you create a standout CV for job applications.",
@@ -69,7 +58,22 @@ def root():
                 "more_details": cv_analyzer_important_messages.important_messages,
             },
             {
-                "name": "AI Powered University SOP Quality Checker",
+                "id":2,
+                "name": "SOP/LOM Plagiarism Checker",
+                "purpose": "For checking the authenticity and originality of your Statement of Purpose (SOP) or Letter of Motivation (LOM) used for your University and VISA application",
+                "description": "Our SOP/LOM Plagiarism Checker is an advanced tool designed to ensure the authenticity and originality of your Statement of Purpose (SOP) or Letter of Motivation (LOM). Tailored for prospective students and job seekers, this tool employs cutting-edge technology to meticulously scan and analyze your document, identifying any instances of plagiarism or unintentional content overlap",
+                "version": "1.0",
+                "type": "Free",
+                "isFree": True,
+                "isActive": False,
+                "status": "Coming Soon",
+                "no_of_plagiarism_checks_performed": no_of_plagiarism_checks_performed,
+                "more_details": plagiarism_checker_important_messages.important_messages,
+            },
+           
+            {
+                "id":3,
+                "name": "AI Powered University SOP/LOM Quality Checker",
                 "purpose": "For University applications",
                 "description": "Our AI Powered University SOP/LOM Quality Checker meticulously assesses your University Statement of Purpose (SOP) or Letter of Motivation (LOM). Receive a detailed report to enhance and optimize your application for a stronger university candidacy.",
                 "version": "1.0",
@@ -81,7 +85,8 @@ def root():
                 "more_details": uni_sop_checker_important_messages.important_messages,
             },
             {
-                "name": "AI Powered VISA SOP Quality Checker",
+                "id":4,
+                "name": "AI Powered VISA SOP/LOM Quality Checker",
                 "purpose": "For VISA applications",
                 "description": "Our AI Powered VISA SOP/LOM quality checker evaluates your Statement of Purpose (SOP) or Letter of Motivation (LOM) for visa applications. Receive a detailed report highlighting areas for improvement, enhancing your chances of visa approval.",
                 "version": "1.0",
@@ -93,6 +98,7 @@ def root():
                 "more_details": None,
             },
             {
+                "id":5,
                 "name": "Boredom Buster Activity Suggestor",
                 "purpose": "For providing personalized activity recommendations based on your current location, personality, mood and budget preference",
                 "description": "Boredom Buster is your go-to tool for discovering exciting activities tailored to your preferences. Whether you're an introvert or extrovert, on a tight budget or ready to splurge, this tool suggests handpicked activities and experiences in your current country. Explore new places, make the most of your free time, and create unforgettable memories.",

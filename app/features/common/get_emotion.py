@@ -92,3 +92,9 @@ def get_emotions(sop):
         print(e)
 
     return emotions_list
+
+
+emotions_for_SOP = [
+    "admiration", "approval", "caring", "curiosity", "excitement", 
+    "gratitude", "joy", "optimism", "pride", "relief", "realization", "surprise", "neutral"
+]

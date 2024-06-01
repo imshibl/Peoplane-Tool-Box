@@ -1,30 +1,28 @@
-fastapi
-uvicorn
-textstat
-pyspellchecker
-spacy
-firebase-admin
-pandas
-joblib
-scikit-learn
-pycountry
-pydantic[email]
-pdfminer
-PyPDF2
-python-multipart
-
-
-# fastapi==0.110.1
-# uvicorn==0.29.0
-# textstat==0.7.3
-# pyspellchecker==0.8.1
-# spacy==3.7.4
-# firebase-admin==6.5.0
-# pandas==2.2.1
+# fastapi
+# uvicorn
+# textstat
+# pyspellchecker
+# spacy
+# firebase-admin
+# pandas
 # joblib
 # scikit-learn
-# pycountry==23.12.11
+# pycountry
 # pydantic[email]
 # pdfminer
 # PyPDF2
 # python-multipart
+fastapi==0.110.1
+uvicorn==0.29.0
+textstat==0.7.3
+pyspellchecker==0.8.1
+spacy==3.7.4
+firebase-admin==6.5.0
+pandas==2.2.1
+joblib
+scikit-learn
+pycountry==23.12.11
+pydantic[email]
+pdfminer
+PyPDF2
+python-multipart

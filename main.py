@@ -19,6 +19,7 @@ origins = [
     "http://localhost",
     "http://localhost:5173",
     "https://feature.d1n2ly2gca58ri.amplifyapp.com",
+    "https://peoplane-agnecy.onrender.com",
 ]
 
 app.add_middleware(

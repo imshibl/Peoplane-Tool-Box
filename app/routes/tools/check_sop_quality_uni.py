@@ -154,12 +154,12 @@ async def check_sop_quality_university(input: sim.CheckSOPQualityModel):
     exp_keywords = experience["total_words"]
     moti_keywords = motivation["total_words"]
     
-    if wordcount > 700 and wordcount < 1400 and automated_readability_index > 12 and spelling_errors < 10 and exp_keywords  >= 1 and moti_keywords >=2 and vocb_richness >= 0.40:
-        predicted_quality = 'Excellent'
-    elif word_count > 500 and word_count < 1500 and readability >= 10 and spelling_errors <= 15 and moti_keywords >=2 and vocb_richness >= 0.35:
-        predicted_quality = 'Good'
-    else:
-        predicted_quality= 'Poor'
+    # if wordcount > 700 and wordcount < 1400 and automated_readability_index > 12 and spelling_errors < 10 and exp_keywords  >= 1 and moti_keywords >=2 and vocb_richness >= 0.40:
+    #     predicted_quality = 'Excellent'
+    # elif word_count > 500 and word_count < 1500 and readability >= 10 and spelling_errors <= 15 and moti_keywords >=2 and vocb_richness >= 0.35:
+    #     predicted_quality = 'Good'
+    # else:
+    #     predicted_quality= 'Poor'
 
     # predicted_quality = 2
 
@@ -172,7 +172,7 @@ async def check_sop_quality_university(input: sim.CheckSOPQualityModel):
 
     success_response = {
         "average_time_to_read_sop": time_take_to_read_sop,
-        "sop_quality": predicted_quality,
+        "sop_quality": "Good",
         "university": about_univerity_message,
         "applying_for": education_level_applying_for,
         "destination_country": destination_country_message,

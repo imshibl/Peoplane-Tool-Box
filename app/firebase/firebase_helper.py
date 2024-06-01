@@ -8,7 +8,7 @@ from firebase_admin import credentials, db, firestore, storage
 
 
 class FirebaseHelper:
-    # USE THIS FOR DEVELOPMENT
+    # # USE THIS FOR DEVELOPMENT
     # __cred = credentials.Certificate(
     #     "C:\\Users\\shibu\\Desktop\\Peoplane-Tool-Box\\firebase_creds.json"
     # )

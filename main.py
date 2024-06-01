@@ -38,3 +38,19 @@ app.include_router(check_sop_quality_visa.router)
 app.include_router(check_plagiarism.router)
 app.include_router(analyze_cv.router)
 app.include_router(feedback.router)
+
+
+# fastapi
+# uvicorn
+# textstat
+# pyspellchecker
+# spacy
+# firebase-admin
+# pandas
+# joblib
+# scikit-learn
+# pycountry
+# pydantic[email]
+# pdfminer
+# PyPDF2
+# python-multipart

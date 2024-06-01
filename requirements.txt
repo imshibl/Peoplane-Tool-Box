@@ -1,17 +1,3 @@
-# fastapi
-# uvicorn
-# textstat
-# pyspellchecker
-# spacy
-# firebase-admin
-# pandas
-# joblib
-# scikit-learn
-# pycountry
-# pydantic[email]
-# pdfminer
-# PyPDF2
-# python-multipart
 fastapi==0.110.1
 uvicorn==0.29.0
 textstat==0.7.3
